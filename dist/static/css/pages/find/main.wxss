@@ -1,0 +1,102 @@
+@import "/static/css/vendor.wxss";
+
+@charset "UTF-8";
+.app.data-v-10c8a7ae {
+  background: #fff;
+  min-height: 100vh;
+}
+.find-img.data-v-10c8a7ae {
+  width: 100%;
+  height: 100rpx;
+}
+.find-list.data-v-10c8a7ae {
+  border-bottom: 2rpx solid #dddee1;
+}
+.find-header-1.data-v-10c8a7ae {
+  max-width: 50%;
+}
+.find-header-2.data-v-10c8a7ae {
+  max-width: 25%;
+}
+.find-header-3.data-v-10c8a7ae {
+  max-width: 25%;
+}
+.artical-img.data-v-10c8a7ae {
+  width: 100%;
+  height: 80rpx;
+}
+.find-action.data-v-10c8a7ae {
+  position: relative;
+}
+.find-action .find-action-c.data-v-10c8a7ae {
+  position: absolute;
+  width: 280rpx;
+  top: 0;
+  left: -290rpx;
+  height: 72rpx;
+  background: #595959;
+  color: #fff;
+}
+.find-action .find-action-c ._div.data-v-10c8a7ae {
+  width: 50%;
+  text-align: center;
+}
+.find-action .find-action-c ._div.data-v-10c8a7ae:first-child {
+  border-right: 2rpx solid #262626;
+}
+.msg-icon.data-v-10c8a7ae {
+  margin-right: -16rpx;
+}
+.link-num-icon.data-v-10c8a7ae {
+  position: relative;
+  top: -4rpx;
+}
+.link-num.data-v-10c8a7ae {
+  vertical-align: middle;
+}
+.find-comment.data-v-10c8a7ae {
+  border-top: 2rpx  solid #dddee1;
+  background: #fff;
+}
+.find-comment-lsit.data-v-10c8a7ae {
+  display: flex;
+}
+.find-comment-name.data-v-10c8a7ae::after {
+  content: '\FF1A';
+  position: relative;
+  right: 0;
+  top: 0;
+  display: inline-block;
+  height: 100%;
+  color: #1c2438;
+}
+.send-comment-inp.data-v-10c8a7ae {
+  width: calc( 80% - 32rpx);
+  max-height: 88rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  overflow: hidden;
+}
+.send-comment-inp ._input.data-v-10c8a7ae {
+  height: 88rpx;
+  line-height: 88rpx;
+}
+.send-comment-inp-btn.data-v-10c8a7ae {
+  width: 20%;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+.send-comment.data-v-10c8a7ae {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 9;
+  background: #fff;
+}
+.shareBtn.data-v-10c8a7ae {
+  background-color: transparent;
+  line-height: 44rpx;
+  border: 2rpx solid #fff;
+  font-size: 24rpx;
+}

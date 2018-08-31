@@ -1,0 +1,42 @@
+<template name="index$0945a21a">
+  <view class="_div data-v-10c8a7ae page app bgf" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-10c8a7ae find-wrapper p-a-2 find-list" wx:key="items.newsid" key="{{items.newsid}}" wx:for="{{news.newslist}}" wx:for-index="index" wx:for-item="items">
+      <i-row i-class=" " class="_i-row data-v-10c8a7ae">
+        <i-col span="4" i-class="col-class " class="_i-col data-v-10c8a7ae">
+          <image class="_img data-v-10c8a7ae find-img" src="{{items.strTitleUrl}}" alt></image>
+        </i-col>
+        <i-col span="20" i-class="col-class p-l-1" class="_i-col data-v-10c8a7ae">
+          <view class="_div data-v-10c8a7ae find-header clearfix">
+            <view class="_h4 data-v-10c8a7ae font-color-main font-title bold text-oh fl find-header-1 p-r-1">{{items.strText}}</view>
+            <view class="_p data-v-10c8a7ae border p-x-1 text-oh fl find-header-2">公司</view>
+            <button class="_button data-v-10c8a7ae font-color-main text-oh fr find-header-3 text-right shareBtn" open-type="share" data-id="111">转发</button>
+          </view>
+          <view class="_div data-v-10c8a7ae find-body">
+            <view class="_div data-v-10c8a7ae artical bg m-t-1">
+              <i-row i-class="p-a-1 " bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" class="_i-row data-v-10c8a7ae">
+                <i-col span="5" class="_i-col data-v-10c8a7ae">
+                  <image class="_img data-v-10c8a7ae artical-img" src="{{items.strTitleUrl}}" alt></image>
+                </i-col>
+                <i-col span="19" class="_i-col data-v-10c8a7ae">
+                  <view class="_p data-v-10c8a7ae font bold artical-cont text-oh-2 p-l-1 "> {{items.strTitle}} </view>
+                </i-col>
+              </i-row>
+            </view>
+          </view>
+          <view class="_div data-v-10c8a7ae find-footer">
+            <view class="_div data-v-10c8a7ae font-sub clearfix">
+              <label class="_span data-v-10c8a7ae find-time fl p-y-1">{{items.dCreateTime}}</label>
+            </view>
+          </view>
+        </i-col>
+      </i-row>
+    </view>
+    <view class="_div data-v-10c8a7ae send-comment clearfix p-x-2 p-b-1" wx:if="{{sendShow}}" catchtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}">
+      <view class="_div data-v-10c8a7ae send-comment-inp border fl m-r-1">
+        <input class="_input data-v-10c8a7ae send-comment-input p-x-1" value="{{sendValue}}" type="text" left focus="true" confirm-type="发送" bindblur="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" />
+      </view>
+      <view class="_div data-v-10c8a7ae font font-color-main fl  send-comment-inp-btn center-a border" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}"> 发送 </view>
+    </view>
+    <i-divider wx:if="{{tip}}" content="已经没有更多了！" class="_i-divider data-v-10c8a7ae"></i-divider>
+  </view>
+</template>

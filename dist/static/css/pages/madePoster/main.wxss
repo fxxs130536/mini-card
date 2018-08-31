@@ -1,0 +1,9 @@
+@import "/static/css/vendor.wxss";
+
+.share-image.data-v-6202c632 {
+  width: 640rpx;
+  height: 940rpx;
+  display: block;
+  box-sizing: border-box;
+  box-shadow: 0 4rpx 4rpx rgba(0, 0, 0, 0.2);
+}

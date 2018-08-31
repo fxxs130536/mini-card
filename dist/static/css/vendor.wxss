@@ -1,0 +1,20 @@
+
+.img-list.data-v-5dab4eec {
+  width: 100%;
+}
+.silde-model.data-v-5dab4eec {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: black;
+}
+.silde-model .silde-model-swiper.data-v-5dab4eec,
+.silde-model .silde-model-image.data-v-5dab4eec {
+  width: 100%;
+}
+.modle-img.data-v-5dab4eec {
+  width: 100%;
+}

@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "电子名片",
+  "usingComponents": {
+    "i-icon": "../../dist/icon/index"
+  }
+}

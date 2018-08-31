@@ -1,0 +1,12 @@
+<template name="index$41401cb8">
+  <view class="_div data-v-69229d6f page app p-a-2">
+    <view class="_div data-v-69229d6f artical-t font-color-title"> {{news.strTitle}} </view>
+    <view class="_div data-v-69229d6f artical-company font-color-main m-y-2">
+      <label class="_span data-v-69229d6f">{{ news.strText}}</label>
+      <label class="_span data-v-69229d6f time m-l-1 font-sub">{{ news.dCreateTime}}</label>
+    </view>
+    <view class="_div data-v-69229d6f artical-cont">
+      <rich-text nodes="{{news.strContent}}" class="_rich-text data-v-69229d6f"></rich-text>
+    </view>
+  </view>
+</template>

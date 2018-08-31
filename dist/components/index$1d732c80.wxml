@@ -1,0 +1,166 @@
+<import src="index$2242b63a" />
+<template name="index$1d732c80">
+  <view class="_div data-v-40c71862 page app">
+    <view class="_div data-v-40c71862 card-wrapper p-x-3 p-t-3 p-b-1">
+      <view class="_div data-v-40c71862 card-header">
+        <view class="_div data-v-40c71862 p-x-1">
+          <image class="_img data-v-40c71862 card-img" src="{{cardInfo.strBackground}}" alt></image>
+        </view>
+        <view class="_div data-v-40c71862 card-main-info p-a-3 clearfix">
+          <view class="_div data-v-40c71862 card-main-info-l fl">
+            <label class="_span data-v-40c71862 card-name text-oh font-title"> {{cardInfo.strName}} </label>
+            <label class="_span data-v-40c71862 card-job-title font-sub">{{cardInfo.strPosition}}</label>
+            <view class="_p data-v-40c71862 card-phone font-sub">{{cardInfo.strMobile}}</view>
+          </view>
+          <view class="_div data-v-40c71862 card-company-logo fr border">
+            <image src="{{cardInfo.strAvatarUrl}}" alt class="_img data-v-40c71862"></image>
+          </view>
+        </view>
+        <navigator class="_navigator data-v-40c71862 card-list-btn" url="/pages/cardlist/main" open-type="reLaunch">
+          <i-icon type="businesscard" size="28" color="#fff" class="_i-icon data-v-40c71862"></i-icon>
+        </navigator>
+      </view>
+    </view>
+    <view class="_div data-v-40c71862 bgf">
+      <view class="_div data-v-40c71862 show-all-card text-center p-b-1" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+        <view wx:if="{{!showInfo}}" class="_div data-v-40c71862">
+          <label class="_span data-v-40c71862 font-mini">展开全部名片信息</label>
+          <i-icon type="unfold" size="14" color="#80848f" class="_i-icon data-v-40c71862"></i-icon>
+        </view>
+        <view class="_div data-v-40c71862 show-all-card text-center p-b-1" wx:else>
+          <label class="_span data-v-40c71862 font-mini">收起以下名片信息</label>
+          <i-icon type="packup" size="14" color="#80848f" class="_i-icon data-v-40c71862"></i-icon>
+        </view>
+      </view>
+      <view class="_div data-v-40c71862 show-all-content p-x-3 p-y-1  bg" hidden="{{!(showInfo)}}">
+        <i-row i-class="m-b-1" class="_i-row data-v-40c71862">
+          <i-col span="3" i-class="col-class font-color-sub" class="_i-col data-v-40c71862">电话</i-col>
+          <i-col span="15" i-class="col-class font-color-title" class="_i-col data-v-40c71862">{{cardInfo.strMobile}}</i-col>
+          <i-col span="6" i-class="col-class" class="_i-col data-v-40c71862">
+            <button class="_button data-v-40c71862 mini-btn m-x-0 fr" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">拨打</button>
+          </i-col>
+        </i-row>
+        <i-row i-class="m-b-1" class="_i-row data-v-40c71862">
+          <i-col span="3" i-class="col-class font-color-sub" class="_i-col data-v-40c71862">微信</i-col>
+          <i-col span="15" i-class="col-class font-color-title" class="_i-col data-v-40c71862">{{cardInfo.strMobile}}</i-col>
+          <i-col span="6" i-class="col-class" class="_i-col data-v-40c71862">
+            <button class="_button data-v-40c71862 mini-btn m-x-0 fr" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}">复制</button>
+          </i-col>
+        </i-row>
+        <i-row i-class="m-b-1" class="_i-row data-v-40c71862">
+          <i-col span="3" i-class="col-class font-color-sub" class="_i-col data-v-40c71862">邮箱</i-col>
+          <i-col span="15" i-class="col-class font-color-title" class="_i-col data-v-40c71862">{{cardInfo.strEmail}}</i-col>
+          <i-col span="6" i-class="col-class" class="_i-col data-v-40c71862">
+            <button class="_button data-v-40c71862 mini-btn m-x-0 fr" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}">复制</button>
+          </i-col>
+        </i-row>
+        <i-row i-class="m-b-1" class="_i-row data-v-40c71862">
+          <i-col span="3" i-class="col-class font-color-sub" class="_i-col data-v-40c71862">公司</i-col>
+          <i-col span="15" i-class="col-class font-color-title" class="_i-col data-v-40c71862">{{cardInfo.strCompany}}</i-col>
+          <i-col span="6" i-class="col-class" class="_i-col data-v-40c71862">
+            <button class="_button data-v-40c71862 mini-btn m-x-0 fr" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}">复制</button>
+          </i-col>
+        </i-row>
+        <i-row i-class="m-b-1" class="_i-row data-v-40c71862">
+          <i-col span="3" i-class="col-class font-color-sub" class="_i-col data-v-40c71862">地址</i-col>
+          <i-col span="15" i-class="col-class font-color-title" class="_i-col data-v-40c71862">{{cardInfo.strCompany}}</i-col>
+          <i-col span="6" i-class="col-class" class="_i-col data-v-40c71862">
+            <button class="_button data-v-40c71862 mini-btn m-x-0 fr" bindtap="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}">复制</button>
+          </i-col>
+        </i-row>
+      </view>
+    </view>
+    <view class="_div data-v-40c71862 card-wrapper m-b-1 p-b-1">
+      <view class="_div data-v-40c71862 button-btn">
+        <i-row i-class="p-x-2" class="_i-row data-v-40c71862">
+          <i-col span="12" i-class="col-class" class="_i-col data-v-40c71862">
+            <i-button i-class="card-btn " bindtap="handleProxy" type="ghost" size="small" data-eventid="{{'6'}}" data-comkey="{{$k}}" class="_i-button data-v-40c71862">分享名片</i-button>
+            <i-action-sheet visible="{{shareVisible}}" actions="{{shareActions}}" show-cancel bindcancel="handleProxy" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}" class="_i-action-sheet data-v-40c71862"></i-action-sheet>
+          </i-col>
+          <i-col span="12" i-class="col-class" class="_i-col data-v-40c71862">
+            <i-button i-class="card-btn" bindtap="handleProxy" type="primary" size="small" data-eventid="{{'8'}}" data-comkey="{{$k}}" class="_i-button data-v-40c71862">存入手机通讯录</i-button>
+          </i-col>
+        </i-row>
+      </view>
+      <view class="_div data-v-40c71862 look">
+        <i-row i-class="p-x-3 vertical-y" class="_i-row data-v-40c71862">
+          <i-col span="12" i-class="col-class font-mini vertical-y" class="_i-col data-v-40c71862">
+            <label class="_span data-v-40c71862 font-mini  look-h">{{cardInfo.intHits}}</label>
+            <label class="_span data-v-40c71862  look-h">人浏览</label>
+          </i-col>
+          <i-col span="12" i-class="col-class" class="_i-col data-v-40c71862">
+            <view class="_div data-v-40c71862 fr m-p-1 font-sub text-center" bindtap="handleProxy" data-eventid="{{'9'}}" data-comkey="{{$k}}">
+              <i-icon wx:if="{{cardInfo.isLike}}" type="praise_fill" size="22" class="_i-icon data-v-40c71862"></i-icon>
+              <i-icon wx:else type="praise" size="22" color="#1c2438" class="_i-icon data-v-40c71862"></i-icon>
+              <view class="_p data-v-40c71862 font-mini">
+                <label class="_span data-v-40c71862 look-link-f">靠谱</label>
+                <label class="_span data-v-40c71862 font-title look-link">{{cardInfo.intLikes}}</label>
+              </view>
+            </view>
+          </i-col>
+        </i-row>
+      </view>
+    </view>
+    <view class="_div data-v-40c71862 card-wrapper p-x-3 m-b-1 ">
+      <view class="_div data-v-40c71862 title clearfix">
+        <view class="_h4 data-v-40c71862 font-title fl text-oh bold">我推荐的商品</view>
+        <label class="_span data-v-40c71862 font-mini fr text-right">全部商品
+          <i-icon type="enter" size="12" class="_i-icon data-v-40c71862"></i-icon>
+        </label>
+      </view>
+      <view class="_div data-v-40c71862 shop-list clearfix">
+        <view class="_div data-v-40c71862 shop-items fl m-b-2 p-b-1" wx:key="index" key="{{index}}" wx:for="{{2}}" wx:for-index="index" wx:for-item="items">
+          <image src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt class="_img data-v-40c71862"></image>
+          <view class="_p data-v-40c71862 font"> 加推人只能名片10人精英版（123465678） </view>
+          <label class="_span data-v-40c71862 font-mini"> ¥1000 </label>
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-40c71862 card-wrapper p-x-3 m-b-1 p-b-2">
+      <view class="_div data-v-40c71862 title clearfix">
+        <view class="_h4 data-v-40c71862 font-title fl text-oh bold">我的个人简介</view>
+      </view>
+      <view class="_div data-v-40c71862 font font-color-title"> {{ cardInfo.strIntro}} </view>
+      <view class="_div data-v-40c71862 audio clearfix border p-x-2 p-y-1 center-y m-y-2">
+        <view class="_div data-v-40c71862 audio-icon fl center-a" bindtap="handleProxy" data-eventid="{{'10'}}" data-comkey="{{$k}}">
+          <view class="_i data-v-40c71862 icon_audio_default {{[isPlay ? 'icon_audio_playing' : '']}}"></view>
+        </view>
+        <view class="_div data-v-40c71862 audio-cont fl">
+          <view class="_p data-v-40c71862 font">我的语音介绍</view>
+          <progress class="_progress data-v-40c71862 m-y-1" percent="{{percentAudio}}" stroke-width="2" activeColor="#09BB07" />
+          <view class="_p data-v-40c71862 clearfix">
+            <label class="_span data-v-40c71862 fl font-mini">{{playTime.currentTime}}</label>
+            <label class="_span data-v-40c71862 fr font-mini">{{playTime.duration}}</label>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-40c71862 card-wrapper p-x-3 m-b-1 p-b-2">
+      <view class="_div data-v-40c71862 title clearfix">
+        <view class="_h4 data-v-40c71862 font-title fl text-oh bold">我的印象标签</view>
+      </view>
+      <view class="_div data-v-40c71862 clearfix">
+        <view class="_div data-v-40c71862 tag p-x-1">
+          <label class="_span data-v-40c71862 font"> 获客神器</label>
+          <label class="_span data-v-40c71862 m-l-1 font-mini font-color-main" style="color:#fff">1030</label>
+        </view>
+        <view class="_div data-v-40c71862 tag p-x-1">
+          <label class="_span data-v-40c71862 font"> 获客神器</label>
+          <label class="_span data-v-40c71862 m-l-1 font-mini font-color-main" style="color:#fff">1030</label>
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-40c71862 card-wrapper m-b-1 p-b-2">
+      <view class="_div data-v-40c71862 title clearfix  p-x-3">
+        <view class="_h4 data-v-40c71862 font-title text-oh fl bold">我的照片</view>
+      </view>
+      <template wx:if="{{cardInfo.images != ''}}" data="{{...$root[$kk+'35'], $root}}" is="index$2242b63a"></template>
+      <view wx:else class="_p data-v-40c71862 font-sub text-center p-y-1">照片空空如也</view>
+    </view>
+    <button class="_button data-v-40c71862 send-msg text-center border" bindtap="handleProxy" data-eventid="{{'11'}}" data-comkey="{{$k}}">
+      <i-icon type="brush" size="18" color="#2d8cf0" class="_i-icon data-v-40c71862"></i-icon>
+      <view class="_p data-v-40c71862 font-mini">留言</view>
+    </button>
+    <i-divider content="我是有底线的！" class="_i-divider data-v-40c71862"></i-divider>
+  </view>
+</template>

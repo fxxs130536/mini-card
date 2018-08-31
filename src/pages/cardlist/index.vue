@@ -4,13 +4,13 @@
       <ul>
           
           <li class="card-items p-b-1 " v-for="(items,index) in cardList" :key="index">
-              <div class="font-title font m-x-2   p-y-1"><span>{{items.map.dCreateDate}}</span><span>来自风潇潇兮的转发</span></div>
-                <div class="card-cont"  @click="linkCard(items.map.strOpenId)">
-                    <i-card  :title="items.map.strName" :extra="items.map.strCompany" :thumb="items.map.strAvatarUrl">
+              <div class="font-title font m-x-2   p-y-1"><span>{{items.dCreateDate}}</span><span>来自风潇潇兮的转发</span></div>
+                <div class="card-cont"  @click="linkCard(items.strOpenId)">
+                    <i-card  :title="items.strName" :extra="items.strCompany" :thumb="items.strAvatarUrl">
                     <view slot="content">
-                        <p class="m-y-2 font-color-title font">{{items.map.strPosition}}<i-icon class="fr" type="collection_fill" size="20" color="#ff9900"/></p>
-                        <p class="font">{{items.map.strMobile}}</p>
-                        <p class="font">{{items.map.strMobile}}</p>
+                        <p class="m-y-2 font-color-title font">{{items.strPosition}}<i-icon class="fr" type="collection_fill" size="20" color="#ff9900"/></p>
+                        <p class="font">{{items.strMobile}}</p>
+                        <p class="font">{{items.strMobile}}</p>
                     </view>
                     <view slot="footer" class="clearfix">
                         <div><span class="font-color-main card-footer fl">NO.{{index + 1}}</span>

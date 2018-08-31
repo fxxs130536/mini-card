@@ -1,0 +1,6 @@
+@import "/static/css/vendor.wxss";
+
+.font-color-title.data-v-69229d6f {
+  font-size: 32rpx;
+  font-weight: bold;
+}

@@ -1,0 +1,12 @@
+<template name="index$0f181604">
+  <view class="_div data-v-26cdd74f page app">
+    <view class="_div data-v-26cdd74f login-img">
+      <image src="/../../static/assets/login.png" class="_img data-v-26cdd74f login-src"></image>
+    </view>
+    <view wx:if="{{getInfoShow}}" class="_div data-v-26cdd74f getInfo">
+      <i-button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="handleProxy" type="primary" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_i-button data-v-26cdd74f">授权登录</i-button>
+      <view wx:else class="_view data-v-26cdd74f">请升级微信版本</view>
+    </view>
+    <i-spin wx:else size="large" fix class="_i-spin data-v-26cdd74f"></i-spin>
+  </view>
+</template>

@@ -1,0 +1,156 @@
+<template name="index$97b7f578">
+  <view class="_div data-v-37f3800f page app">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#fff" indicator-active-color="#2d8cf0" class="_swiper data-v-37f3800f swiper">
+      <block wx:key="index" key="{{index}}" wx:for="{{imgUrls}}" wx:for-index="index" wx:for-item="itmes">
+        <swiper-item class="_swiper-item data-v-37f3800f">
+          <image src="{{itmes}}" class="_image data-v-37f3800f slide-image" width="100%" height="100%"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="_div data-v-37f3800f web-wrapper">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color"> 公司介绍 </view>
+      <view class="_div data-v-37f3800f web-cont p-a-2 bgf m-a-2">
+        <view class="_p data-v-37f3800f font-title">加推</view>
+        <view class="_p data-v-37f3800f font-title">致力于提升企业销售效率</view>
+        <view class="_p data-v-37f3800f font">全球智能</view>
+        <label class="_span data-v-37f3800f">这是图片</label>
+      </view>
+    </view>
+    <view class="_div data-v-37f3800f web-wrapper">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color"> 产品介绍 </view>
+      <view class="_div data-v-37f3800f web-cont p-a-2 bgf m-a-2">
+        <view class="_p data-v-37f3800f font-title">不至于领先</view>
+        <view class="_p data-v-37f3800f font-title">致力于提升企业销售效率</view>
+        <view class="_p data-v-37f3800f font">全球智能</view>
+        <label class="_span data-v-37f3800f">这是图片</label>
+      </view>
+    </view>
+    <view class="_div data-v-37f3800f web-wrapper">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color"> 企业咨询 </view>
+      <view class="_ul data-v-37f3800f m-l-2 tem-list">
+        <view class="_li data-v-37f3800f tem-items p-y-2">
+          <view class="_div data-v-37f3800f tem-items-img">
+            <image src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt class="_img data-v-37f3800f"></image>
+          </view>
+          <view class="_div data-v-37f3800f tem-items-r p-x-1" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+            <view class="_p data-v-37f3800f font-title m-b-2"> 电商玩法升级， 电商玩法升级， 电商玩法升级， 电商玩法升级， 电商玩法升级， </view>
+            <label class="_span data-v-37f3800f font">2018-07-20</label>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-37f3800f web-wrapper">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color"> 公司视频 </view>
+      <video class="_video data-v-37f3800f video" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"
+        danmu-btn="false" controls objectFit="fill" show-fullscreen-btn></video>
+    </view>
+    <view class="_div data-v-37f3800f web-wrapper">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color"> 核心成员 </view>
+      <i-row type="{{flex}}" i-class="teams m-x-1 m-y-2" class="_i-row data-v-37f3800f">
+        <i-col span="{{12}}" i-class="col-class m-b-2 p-x-1" class="_i-col data-v-37f3800f">
+          <view class="_div data-v-37f3800f teams-img">
+            <image class="_img data-v-37f3800f" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt></image>
+          </view>
+          <view class="_h4 data-v-37f3800f font-title teams-name">刘德华</view>
+          <view class="_p data-v-37f3800f teams-post font-title">打扫厕所</view>
+          <view class="_div data-v-37f3800f teams-divider m-y-1"></view>
+          <view class="_p data-v-37f3800f teams-p">前微信扫地王</view>
+          <view class="_p data-v-37f3800f teams-p">前阿里挑粪王前阿里挑粪</view>
+          <view class="_p data-v-37f3800f teams-p">前阿里挑粪王前阿里挑粪王</view>
+        </i-col>
+        <i-col span="{{12}}" i-class="col-class m-b-2 p-x-1" class="_i-col data-v-37f3800f">
+          <view class="_div data-v-37f3800f teams-img">
+            <image class="_img data-v-37f3800f" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt></image>
+          </view>
+          <view class="_div data-v-37f3800f teams-r p-x-1">
+            <view class="_h4 data-v-37f3800f font-title teams-name">刘德华</view>
+            <view class="_p data-v-37f3800f teams-post font-title">打扫厕所</view>
+            <view class="_div data-v-37f3800f teams-divider m-y-1"></view>
+            <view class="_p data-v-37f3800f teams-p">前微信扫地王</view>
+            <view class="_p data-v-37f3800f teams-p">前阿里挑粪王前阿里挑粪</view>
+            <view class="_p data-v-37f3800f teams-p">前阿里挑粪王前阿里挑粪王</view>
+          </view>
+        </i-col>
+        <i-col span="{{12}}" i-class="col-class m-b-2 p-x-1" class="_i-col data-v-37f3800f">
+          <view class="_div data-v-37f3800f teams-img">
+            <image class="_img data-v-37f3800f" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt></image>
+          </view>
+          <view class="_div data-v-37f3800f teams-r p-x-1">
+            <view class="_h4 data-v-37f3800f font-title teams-name">刘德华</view>
+            <view class="_p data-v-37f3800f teams-post font-title">打扫厕所</view>
+            <view class="_div data-v-37f3800f teams-divider m-y-1"></view>
+            <view class="_p data-v-37f3800f teams-p">前微信扫地王</view>
+            <view class="_p data-v-37f3800f teams-p">前阿里挑粪王前阿里挑粪</view>
+            <view class="_p data-v-37f3800f teams-p">前阿里挑粪王前阿里挑粪adadada王</view>
+          </view>
+        </i-col>
+      </i-row>
+    </view>
+    <view class="_div data-v-37f3800f web-wrapper">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color"> 我们正在寻找 </view>
+      <view class="_div data-v-37f3800f web-cont  bgf m-a-2 radius">
+        <i-row i-class="look-list p-x-1  p-y-2" class="_i-row data-v-37f3800f">
+          <i-col span="12" i-class="col-class look-items p-x-1 m-b-2" wx:key="index" key="{{index}}" wx:for="{{4}}" wx:for-index="index" wx:for-item="items" class="_i-col data-v-37f3800f">
+            <view class="_div data-v-37f3800f radius look-wrapper center-a" style=" {{('background:' + '#ed3f14' + ';')}}">
+              <view class="_div data-v-37f3800f">
+                <view class="_p data-v-37f3800f">拥有丰富</view>
+                <view class="_p data-v-37f3800f">企业资源</view>
+                <view class="_p data-v-37f3800f">渠道合作伙伴</view>
+              </view>
+            </view>
+          </i-col>
+        </i-row>
+      </view>
+    </view>
+    <view class="_div data-v-37f3800f web-wrapper">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color"> 服务客户 </view>
+      <view class="_div data-v-37f3800f web-cont  bgf m-a-2 radius p-y-2">
+        <view class="_p data-v-37f3800f font-title bold">全国30+行业</view>
+        <view class="_p data-v-37f3800f font-title bold">700+品牌已选择加推</view>
+        <i-row i-class="look-list p-x-1  p-y-2 server-lsit" class="_i-row data-v-37f3800f">
+          <i-col span="6" i-class="col-class look-items p-x-1 m-b-2 server-items" wx:key="index" key="{{index}}" wx:for="{{4}}" wx:for-index="index" wx:for-item="items" class="_i-col data-v-37f3800f">
+            <view class="_div data-v-37f3800f radius server-wrapper">
+              <image src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt class="_img data-v-37f3800f"></image>
+            </view>
+          </i-col>
+        </i-row>
+      </view>
+    </view>
+    <view class="_div data-v-37f3800f web-wrapper">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color"> 加入我们 </view>
+      <view class="_div data-v-37f3800f web-cont  bgf p-a-2 radius">
+        <view class="_p data-v-37f3800f font-title bold m-b-1">如果你有手有脚有颜值，会撸代码欢迎入坑！！！</view>
+        <i-row i-class="join-list " class="_i-row data-v-37f3800f">
+          <i-col span="24" i-class="col-class join-items border p-x-1 p-y-2 center-y m-b-2" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_i-col data-v-37f3800f">
+            <view class="_div data-v-37f3800f join-l fl">
+              <view class="_h4 data-v-37f3800f bold">java高级工程师</view>
+              <view class="_div data-v-37f3800f join-ask">
+                <label class="_span data-v-37f3800f">薪资：20000</label>
+                <label class="_span data-v-37f3800f">经验：5</label>
+                <label class="_span data-v-37f3800f">学历：本科</label>
+              </view>
+            </view>
+            <view class="_div data-v-37f3800f join-r fr text-right">
+              <i-icon type="enter" color="#495060" size="22" class="_i-icon data-v-37f3800f"></i-icon>
+            </view>
+          </i-col>
+        </i-row>
+      </view>
+    </view>
+    <view class="_div data-v-37f3800f web-wrapper">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color"> 联系我们 </view>
+      <i-button bindtap="handleProxy" type="primary" size="default" i-class="m-x-2 bold font-size-title" data-eventid="{{'2'}}" data-comkey="{{$k}}" class="_i-button data-v-37f3800f">05780000888</i-button>
+    </view>
+    <view class="_div data-v-37f3800f web-wrapper bg">
+      <view class="_div data-v-37f3800f title bg font-title p-x-2 p-y-1 font-color-sub"> 公司地址 </view>
+      <view class="_div data-v-37f3800f p-a-2">
+        <view class="_p data-v-37f3800f font-title font-color-sub center-y ">
+          <i-icon type="coordinates_fill" color="#80848f" size="22" class="_i-icon data-v-37f3800f"></i-icon> 广东省佛山市阿呆多久单ad阿达i </view>
+        <view class="_footer data-v-37f3800f text-center m-t-2 font-sub">
+          <image class="_img data-v-37f3800f footer-logo" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt></image>
+          <view class="_p data-v-37f3800f">印生活技术支持</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

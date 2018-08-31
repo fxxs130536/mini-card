@@ -226,7 +226,9 @@ let api = {
   //  查询名片列表
   post_look_card_list: (data) => axios.getAjaxData(data, undefined, 'db6dab05-b6ea-48f4-8e4d-60a9b4278b90'),
   // 查看名片首页
-  post_card_home: (data) => axios.getAjaxData(data, undefined, '82affbc4-f8bd-429b-9ea7-5c6e2067eda5')
+  post_card_home: (data) => axios.getAjaxData(data, undefined, '82affbc4-f8bd-429b-9ea7-5c6e2067eda5'),
+  // 添加操作日志
+  post_aad_log: (data) => axios.getAjaxData(data, undefined, '2DA8DF88-E8F3-4BC5-ABF0-111843ABACF1')
 
 }
 

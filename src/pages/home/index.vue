@@ -40,27 +40,27 @@
                   <i-row i-class="m-b-1"> 
                         <i-col span="3" i-class="col-class font-color-sub">电话</i-col>
                         <i-col span="15" i-class="col-class font-color-title">{{cardInfo.strMobile}}</i-col>
-                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr" @click="dial(cardInfo.strMobile)">拨打</button></i-col>
+                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr" @click="dial(cardInfo.strMobile,'strMobile')">拨打</button></i-col>
                 </i-row>
                   <i-row i-class="m-b-1"> 
                         <i-col span="3" i-class="col-class font-color-sub">微信</i-col>
                         <i-col span="15" i-class="col-class font-color-title">{{cardInfo.strMobile}}</i-col>
-                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr"  @click="copy(cardInfo.strMobile)">复制</button></i-col>
+                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr"  @click="copy(cardInfo.strMobile,'wx')">复制</button></i-col>
                 </i-row>
                   <i-row i-class="m-b-1"> 
                         <i-col span="3" i-class="col-class font-color-sub">邮箱</i-col>
                         <i-col span="15" i-class="col-class font-color-title">{{cardInfo.strEmail}}</i-col>
-                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr"  @click="copy(cardInfo.strEmail)">复制</button></i-col>
+                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr"  @click="copy(cardInfo.strEmail,'strEmail')">复制</button></i-col>
                 </i-row>
                 <i-row i-class="m-b-1"> 
                         <i-col span="3" i-class="col-class font-color-sub">公司</i-col>
                         <i-col span="15" i-class="col-class font-color-title">{{cardInfo.strCompany}}</i-col>
-                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr"  @click="copy(cardInfo.strCompany)">复制</button></i-col>
+                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr"  @click="copy(cardInfo.strCompany,'strCompany')">复制</button></i-col>
                 </i-row>
                  <i-row i-class="m-b-1"> 
                         <i-col span="3" i-class="col-class font-color-sub">地址</i-col>
                         <i-col span="15" i-class="col-class font-color-title">{{cardInfo.strCompany}}</i-col>
-                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr"  @click="copy(cardInfo.strCompany)">复制</button></i-col>
+                        <i-col span="6" i-class="col-class"><button class="mini-btn m-x-0 fr"  @click="copy(cardInfo.strCompany,'strCompany')">复制</button></i-col>
                 </i-row>
               </div>
           </div>
@@ -179,7 +179,7 @@
 
 <script>
 import api from '@/utils/api'
-// import store from '@/store/store'
+import {addEditLog} from '@/http'
 import { mapGetters } from 'vuex'
 import slideFull from '@/components/slideFull'
 
@@ -217,12 +217,13 @@ export default {
   },
   onShareAppMessage () {
     return {
-      title: '印生活名片',
-      desc: '你好,我是' + this.cardInfo.strCompany + '的' + this.cardInfo.strName + '。这是我的名片请惠存',
+      title: this.cardInfo.strName + '名片',
       imageUrl: this.cardInfo.strAvatarUrl,
       path: '/pages/home/main?strOpenId_b=' + this.openId,
-      success: function (res) {
-        console.log(res)
+      success: async res => {
+        let Details = this.userInfo.strName + '分享了' + this.shareCardInfo.strName + '的名片'
+        let paramData = {'Name': '分享名片', 'Type': '101', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+        await api.post_aad_log(paramData)
       },
       fail: function (res) {
 
@@ -235,18 +236,28 @@ export default {
 
   computed: {
     ...mapGetters({
+      shareCardInfo: 'shareCardInfo',
       openId: 'openId',
-      shareOpenId: 'shareOpenId'
+      shareOpenId: 'shareOpenId',
+      userInfo: 'userInfo'
     })
   },
 
   mounted () {
+    this.addCardLog()
     this.addCardList()
     this.getCardInfo()
     this.initAudio()
   },
 
   methods: {
+    async  addCardLog () {
+      var Details = this.userInfo.strName + '查看名片' + this.shareCardInfo.strName + '的名片'
+
+      var paramData = {'Name': '查看名片', 'Type': '查看名片&a', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
+      await addEditLog(paramData)
+    },
     async  addCardList () {
       var params = {'strOpenId_c': this.openId, 'strOpenId_b': this.shareOpenId, type: 4}
       await api.post_like(params)
@@ -256,28 +267,63 @@ export default {
       var params = {'strOpenId_c': this.openId, 'strOpenId_b': this.shareOpenId}
       var res = await api.post_card_home(params)
       this.cardInfo = res
-      // console.log(res)
-      // this.$store.commit('shareCardInfo', res)
+      console.log(res)
+      this.$store.commit('shareCardInfo', res)
     },
     async link () {
-      var params = {'strOpenId_c': this.$store.state.openId, 'strOpenId_b': this.$store.state.shareOpenId, type: 2}
-      await api.post_like(params)
+      var params = {'strOpenId_c': this.openId, 'strOpenId_b': this.shareOpenId, type: 2}
+      var res = await api.post_like(params)
+      var Details = this.userInfo.strName + '点赞了' + this.shareCardInfo.strName + '的名片'
+
+      var paramData = {'Name': '点赞名片', 'Type': '100', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
+      await addEditLog(paramData)
       this.getCardInfo()
     },
     dial (str) {
-      wx.makePhoneCall({
-        phoneNumber: str // 仅为示例，并非真实的电话号码
+      this.$wxapi.makePhoneCall({
+        phoneNumber: str
+      }).then(async res => {
+        let Details = this.userInfo.strName + '拨打了' + this.shareCardInfo.strName + '的电话'
+
+        let paramData = {'Name': '拨打电话', 'Type': '102', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+        await addEditLog(paramData)
+      }).catch(res => {
+        console.log(res)
       })
     },
-    copy (str) {
+    copy (str, type) {
       wx.setClipboardData({
         data: str,
-        success: function (res) {
-          wx.getClipboardData({
-            success: function (res) {
-              console.log(res.data) // data
-            }
-          })
+        success: async res => {
+          switch (type) {
+            case 'strEmail':
+              var Details = this.userInfo.strName + '复制了' + this.shareCardInfo.strName + '的邮箱'
+
+              var paramData = {'Name': '复制邮箱', 'Type': '103', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+              await addEditLog(paramData)
+              break
+            case 'wx':
+              var Details = this.userInfo.strName + '复制了' + this.shareCardInfo.strName + '的微信'
+
+              var paramData = {'Name': '复制微信', 'Type': '104', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+              await addEditLog(paramData)
+              break
+            case 'strCompany':
+
+              var Details = this.userInfo.strName + '复制了' + this.shareCardInfo.strName + '的公司'
+              var paramData = {'Name': '复制公司', 'Type': '复制公司&a', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+              await addEditLog(paramData)
+              // await api.test_Api()
+              break
+            case 'strAddress':
+              var Details = this.userInfo.strName + '复制了' + this.shareCardInfo.strName + '的地址'
+              var paramData = {'Name': '复制地址', 'Type': '复制地址&a', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+              await addEditLog(paramData)
+              break
+            default:
+              break
+          }
         },
         fail: function (res) {
 
@@ -293,7 +339,10 @@ export default {
         workAddressStreet: this.cardInfo.strAddress,
         organization: this.cardInfo.strCompany,
         title: this.cardInfo.strPosition,
-        success: function (res) {
+        success: async res => {
+          var Details = this.userInfo.strName + '保存了' + this.shareCardInfo.strName + '的电话'
+          var paramData = {'Name': '保存电话', 'Type': '保存电话&a', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+          await addEditLog(paramData)
           console.log(res)
         },
         fail: function (res) {

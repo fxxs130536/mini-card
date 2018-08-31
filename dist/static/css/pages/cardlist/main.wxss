@@ -1,0 +1,41 @@
+@import "/static/css/vendor.wxss";
+
+@charset "UTF-8";
+.card-cont.data-v-1476595e {
+  box-shadow: 0 0 4rpx rgba(0, 0, 0, 0.2) 0 4rpx 4rpx rgba(0, 0, 0, 0.2);
+}
+.card-footer-r.data-v-1476595e {
+  position: relative;
+  z-index: 2;
+}
+.card-more.data-v-1476595e {
+  width: 240rpx;
+  position: absolute;
+  background: #fff;
+  right: -32rpx;
+  bottom: -176rpx;
+  border-radius: 8rpx;
+  z-index: 2;
+}
+.close-card.data-v-1476595e {
+  position: relative;
+}
+.close-card.data-v-1476595e::after {
+  position: absolute;
+  content: "\6B64\540D\7247\5DF2\5C4F\853D";
+  display: inline-block;
+  top: 0;
+  left: 32rpx;
+  bottom: 0;
+  right: 32rpx;
+  color: #fff;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  background: rgba(187, 190, 196, 0.8);
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 1;
+}

@@ -1,0 +1,11 @@
+<template name="index$3ea3a5a3">
+  <view class="_div data-v-6202c632 page app fixed">
+    <view class="_div data-v-6202c632 center-a">
+      <image src="{{shareImage}}" class="_image data-v-6202c632 share-image m-y-3 border"></image>
+    </view>
+    <canvasdrawer painting="{{painting}}" class="_canvasdrawer data-v-6202c632 canvasdrawer" bindgetImage="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}"></canvasdrawer>
+    <view class="_div data-v-6202c632 tabBar" style="border:none;height:auto">
+      <i-button bind:click="handleClick" type="primary" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_i-button data-v-6202c632">保存图片分享到朋友圈</i-button>
+    </view>
+  </view>
+</template>

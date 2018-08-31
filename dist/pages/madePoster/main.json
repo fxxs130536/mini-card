@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "名片海报",
+  "usingComponents": {
+    "canvasdrawer": "../../dist/canvasdrawer/canvasdrawer",
+    "i-button": "../../dist/button/index"
+  }
+}

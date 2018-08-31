@@ -228,7 +228,7 @@ import {
         query.select('#chatScrollView').boundingClientRect()
         query.selectViewport().scrollOffset()
         query.exec(function (res) {
-          console.log(res[0].height - scrollHeight)
+          // console.log(res[0].height - scrollHeight)
           _this.chatTop = (res[0].height - scrollHeight) < 0 ? 999999999 : res[0].height - scrollHeight + 1000
           if ((res[0].height - scrollHeight) < 0) {
             wx.pageScrollTo({

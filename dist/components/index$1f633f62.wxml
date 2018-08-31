@@ -1,0 +1,37 @@
+<template name="index$1f633f62">
+  <view class="_div data-v-1476595e page app">
+    <view class="_ul data-v-1476595e">
+      <view class="_li data-v-1476595e card-items p-b-1 " wx:key="index" key="{{index}}" wx:for="{{cardList}}" wx:for-index="index" wx:for-item="items">
+        <view class="_div data-v-1476595e font-title font m-x-2   p-y-1">
+          <label class="_span data-v-1476595e">{{items.dCreateDate}}</label>
+          <label class="_span data-v-1476595e">来自风潇潇兮的转发</label>
+        </view>
+        <view class="_div data-v-1476595e card-cont" bindtap="handleProxy" data-eventid="{{'1-'+index}}" data-comkey="{{$k}}">
+          <i-card title="{{items.strName}}" extra="{{items.strCompany}}" thumb="{{items.strAvatarUrl}}" class="_i-card data-v-1476595e">
+            <view slot="content" class="_view data-v-1476595e">
+              <view class="_p data-v-1476595e m-y-2 font-color-title font">{{items.strPosition}}
+                <i-icon class="_i-icon data-v-1476595e fr" type="collection_fill" size="20" color="#ff9900"></i-icon>
+              </view>
+              <view class="_p data-v-1476595e font">{{items.strMobile}}</view>
+              <view class="_p data-v-1476595e font">{{items.strMobile}}</view>
+            </view>
+            <view slot="footer" class="_view data-v-1476595e clearfix">
+              <view class="_div data-v-1476595e">
+                <label class="_span data-v-1476595e font-color-main card-footer fl">NO.{{index + 1}}</label>
+                <label class="_span data-v-1476595e fr card-footer card-footer-r " bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}">
+                  <i-icon type="more" size="28" class="_i-icon data-v-1476595e"></i-icon>
+                  <view class="_div data-v-1476595e card-more" hidden="{{!(false)}}">
+                    <view class="_p data-v-1476595e p-x-2 p-y-1 text-center center-a">
+                      <i-icon type="collection" size="20" color="#ff9900" class="_i-icon data-v-1476595e"></i-icon>名片标星</view>
+                    <view class="_p data-v-1476595e p-x-2 p-y-1 text-center center-a">
+                      <i-icon type="offline" size="20" class="_i-icon data-v-1476595e"></i-icon>屏蔽名片</view>
+                  </view>
+                </label>
+              </view>
+            </view>
+          </i-card>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

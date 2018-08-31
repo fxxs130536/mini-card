@@ -1,0 +1,49 @@
+<template name="index$796e633c">
+  <view class="_div data-v-311e711e page app">
+    <view class="_div data-v-311e711e city-wrapper">
+      <transition name="fade" class="_transition data-v-311e711e">
+        <view class="_nav data-v-311e711e top-bar p-x-2" wx:if="{{topBarShow}}">
+          <view class="_div data-v-311e711e top-bar-l fl text-oh  font-color-sub">加推科技商城</view>
+          <view class="_div data-v-311e711e top-bar-r font-color-sub fr">
+            <i-icon class="_i-icon data-v-311e711e p-a-1" type="publishgoods_fill" size="24"></i-icon>
+            <i-icon class="_i-icon data-v-311e711e p-a-1" type="mine" size="24"></i-icon>
+            <i-icon class="_i-icon data-v-311e711e p-a-1" type="share" size="24"></i-icon>
+          </view>
+        </view>
+      </transition>
+      <view class="_header data-v-311e711e banner">
+        <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg" alt class="_img data-v-311e711e"></image>
+        <view class="_div data-v-311e711e nav-right clearfix">
+          <i-icon class="_i-icon data-v-311e711e center-a" type="publishgoods_fill" size="22"></i-icon>
+          <i-icon class="_i-icon data-v-311e711e center-a" type="mine" size="22"></i-icon>
+          <i-icon class="_i-icon data-v-311e711e center-a" type="share" size="22"></i-icon>
+        </view>
+      </view>
+      <view class="_div data-v-311e711e shopTitle p-a-1  bgf">
+        <view class="_div data-v-311e711e shop-logo center-a  radius">
+          <image class="_img data-v-311e711e radius" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt></image>
+        </view>
+        <view class="_div data-v-311e711e shop-name">
+          <view class="_h4 data-v-311e711e font-title bold">印生活科技商城</view>
+          <view class="_p data-v-311e711e">
+            <i-icon type="task_fill" color="#2d8cf0" size="20" class="_i-icon data-v-311e711e"></i-icon> 认证企业</view>
+        </view>
+      </view>
+      <view class="_div data-v-311e711e shop-list">
+        <view class="_ul data-v-311e711e p-y-2 p-x-1 clearfix">
+          <view class="_li data-v-311e711e shop-items oh radius bgf fl m-b-2" bindtap="handleProxy" wx:key="index" key="{{index}}" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{5}}" wx:for-index="index" wx:for-item="items">
+            <view class="_div data-v-311e711e shop-top center-a">
+              <image class="_img data-v-311e711e shop-img" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt></image>
+              <view class="_div data-v-311e711e shop-tip font-title center-a p-x-1">推荐产品</view>
+            </view>
+            <view class="_div data-v-311e711e p-a-1">
+              <view class="_p data-v-311e711e shop-desc text-oh-2 font-title">买了这产品一年买车两年买房三年赢取白富美从此走上人生巅峰！！！</view>
+              <view class="_p data-v-311e711e shop-price  ">¥ 1000</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <i-divider content="我是有底线的！" class="_i-divider data-v-311e711e"></i-divider>
+  </view>
+</template>

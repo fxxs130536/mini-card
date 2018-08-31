@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "招聘详情",
+  "usingComponents": {
+    "i-button": "../../dist/button/index"
+  }
+}

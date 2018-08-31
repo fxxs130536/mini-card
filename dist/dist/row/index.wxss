@@ -1,0 +1,2 @@
+.i-row:after{content:"";display:table;clear:both}
+.flex{display: flex;width: 100%;}

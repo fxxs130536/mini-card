@@ -54,6 +54,7 @@
 
 <script>
 import api from '@/utils/api'
+import {addEditLog} from '@/http'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
@@ -71,13 +72,34 @@ export default {
   },
   components: {},
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      shareCardInfo: 'shareCardInfo',
+      shareOpenId: 'shareOpenId',
+      openId: 'openId',
+      userInfo: 'userInfo'
+    })
+  },
 
-  mounted () {},
+  mounted () {
+    this.addShopLog()
+  },
 
   methods: {
-    goDetails (paras) {
+    async addShopLog () {
+      var Details = this.userInfo.strName + '查看了' + this.shareCardInfo.strName + '的公司商城'
+
+      var paramData = {'Name': '查看了商城', 'Type': '106', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
+      await addEditLog(paramData)
+    },
+    async goDetails (paras) {
       this.$router.push({path: '/pages/shopDetails/main'})
+      var Details = this.userInfo.strName + '查看了' + this.shareCardInfo.strName + '的公司商城的某某商品'
+
+      var paramData = {'Name': '查看了某个商城', 'Type': '106', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
+      await addEditLog(paramData)
     }
   }
 }

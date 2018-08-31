@@ -1,0 +1,15 @@
+@import "/static/css/vendor.wxss";
+
+.page.data-v-b027c850 {
+  padding-bottom: 160rpx !important;
+}
+.font-color-title.data-v-b027c850 {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.call-btn.data-v-b027c850 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

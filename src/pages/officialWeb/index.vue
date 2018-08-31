@@ -209,6 +209,7 @@
 
 <script>
 import api from '@/utils/api'
+import {addEditLog} from '@/http'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
@@ -227,11 +228,27 @@ export default {
 
   components: {},
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      shareCardInfo: 'shareCardInfo',
+      shareOpenId: 'shareOpenId',
+      openId: 'openId',
+      userInfo: 'userInfo'
+    })
+  },
 
-  mounted () {},
+  mounted () {
+    this.addWebLog()
+  },
 
   methods: {
+    async  addWebLog () {
+      var Details = this.userInfo.strName + '查看了' + this.shareCardInfo.strName + '公司的官网'
+
+      var paramData = {'Name': '查看官网', 'Type': '查看官网&a', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
+      await addEditLog(paramData)
+    },
     call (str) {
       wx.makePhoneCall({
         phoneNumber: str

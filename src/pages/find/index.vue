@@ -18,7 +18,7 @@
                 <div class="find-body">
                     <!-- 文章 -->
                     <div class="artical bg m-t-1">
-                        <i-row i-class="p-a-1 " @click="detailArtical(items.id)">
+                        <i-row i-class="p-a-1 " @click="detailArtical(items.id,items.strTitle)">
                             <i-col span="5">
                                 <img class="artical-img" :src="items.strTitleUrl" alt="">
                             </i-col>
@@ -81,6 +81,7 @@
 
 <script>
 import api from '@/utils/api'
+import {addEditLog} from '@/http'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
@@ -132,28 +133,50 @@ export default {
 
   components: {},
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      shareCardInfo: 'shareCardInfo',
+      shareOpenId: 'shareOpenId',
+      openId: 'openId',
+      userInfo: 'userInfo'
+    })
+  },
 
   mounted () {
+    this.addFindeLog()
     wx.hideShareMenu()
     this.getData()
   },
 
   methods: {
+    async addFindeLog () {
+      var Details = this.userInfo.strName + '查看了' + this.shareCardInfo.strName + '的公司动态'
+
+      var paramData = {'Name': '公司动态', 'Type': '108', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
+      await addEditLog(paramData)
+    },
     async getData () {
+      console.log(11)
       var _this = this
       this.par['$rowIndex']++
       const res = await api.get_PropagandaColumn(this.par)
       const dgData = res.dgData
+
       dgData.map(item => {
         _this.news.newslist.push(item)
       })
-      console.log(dgData)
+
       wx.stopPullDownRefresh()
       wx.hideLoading()
     },
-    detailArtical (id) {
+    async detailArtical (id, artTitle) {
       this.$router.push({ path: '/pages/advisoryDetails/main', query: { id: id, title: '公司动态详情' } })
+      var Details = this.userInfo.strName + '查阅了' + this.shareCardInfo.strName + '公司文章' + artTitle
+
+      var paramData = {'Name': '公司动态详情', 'Type': '109', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
+      await addEditLog(paramData)
     },
     comment () {
       this.actionShow = false

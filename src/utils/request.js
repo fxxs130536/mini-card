@@ -1,4 +1,4 @@
-import Fly from 'flyio/dist/npm/wx'
+var Fly = require('flyio/dist/npm/wx')
 
 const fly = new Fly()
 // 定义公共headers
@@ -7,7 +7,7 @@ const fly = new Fly()
 
 fly.config.timeout = 10000
 // 设置请求基地址
-fly.config.baseURL = process.env.BASE_API
+fly.config.baseURL = 'https://yj.kiy.cn' // process.env.BASE_API
 // 添加请求拦截器
 fly.interceptors.request.use((request) => {
   // 给所有请求添加自定义header
@@ -25,26 +25,16 @@ fly.interceptors.request.use((request) => {
 
 fly.interceptors.response.use(
   (response) => {
-    let res = response.data
-    // 只将请求结果的data字段返回
-
-    if (res.success) {
-      return response.data
-    } else {
-      wx.showToast({
-        title: res.msg,
-        icon: 'none'
-      })
-      return Promise.resolve('error')
-    }
+    return response
   },
   (err) => {
+    debugger
     // 发生网络错误后会走到这里
     wx.showToast({
       title: err.msg,
       icon: 'none'
     })
-    return Promise.resolve(err)
+    return Promise.reject(err)
   }
 )
 

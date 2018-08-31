@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "动态",
+  "usingComponents": {
+    "i-icon": "../../dist/icon/index",
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "i-divider": "../../dist/divider/index"
+  }
+}

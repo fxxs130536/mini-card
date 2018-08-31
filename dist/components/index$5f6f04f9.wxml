@@ -1,0 +1,36 @@
+<template name="index$5f6f04f9">
+  <view class="_div data-v-4dc50f08 page app page_chat" bindtap="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}">
+    <scroll-view class="_scroll-view data-v-4dc50f08 chartboard {{[focus ? 'fixed' : '', plus ? 'scrollP' : '']}}" scroll-top="{{chatTop}}" scroll-y id="scrollH" scroll-into-view="scrBottom" style=" {{('height:' + scrollHeight + ';')}}">
+      <view id="chatScrollView" class="_div data-v-4dc50f08">
+        <view wx:key="index" key="{{index}}" class="_div data-v-4dc50f08 chat-item" wx:for="{{message}}" wx:for-index="index" wx:for-item="item">
+          <view class="_view data-v-4dc50f08 msgarea {{[item.from === 'me' ? 'fromme' : 'other']}}">
+            <image class="_image data-v-4dc50f08 icon" src="{{item.icon}}"></image>
+            <view class="_view data-v-4dc50f08 msg" wx:if="{{item.type ==='text'}}">{{item.msg}}</view>
+            <image mode="widthFix" class="_image data-v-4dc50f08 msg-img" wx:elif="{{item.type === 'images'}}" src="{{item.msg}}" alt bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}"></image>
+            <view class="_view data-v-4dc50f08 clearfix"></view>
+          </view>
+        </view>
+      </view>
+      <view id="scrBottom" class="_div data-v-4dc50f08"></view>
+    </scroll-view>
+    <view id="hei" class="_div data-v-4dc50f08"></view>
+    <view class="_view data-v-4dc50f08 input shouw-plus {{[plus ? 'plusShow' : '']}}">
+      <view class="_view data-v-4dc50f08 input_layout">
+        <image class="_image data-v-4dc50f08 input_icon voice" src="/../../static/assets/chat/voice.png"></image>
+        <image class="_image data-v-4dc50f08 input_icon face" src="/../../static/assets/chat/face.png"></image>
+        <image class="_image data-v-4dc50f08 input_icon plus" src="/../../static/assets/chat/plus.png" catchtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}"></image>
+        <view class="_view data-v-4dc50f08 send {{[readyToSend === '' ? 'hidden' : '']}}" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}">发送</view>
+        <input bindinput="handleProxy" value="{{readyToSend}}" class="_input data-v-4dc50f08 input_text {{[focusFlag ? 'focusFlag' : '']}}" bindfocus="handleProxy" bindblur="handleProxy" bindtype="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}"
+        />
+      </view>
+      <view class="_view data-v-4dc50f08 plus-cont p-x-3 p-y-2 fl" catchtap="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}">
+        <view class="_div data-v-4dc50f08 plus-items m-b-1 ">
+          <view class="_div data-v-4dc50f08 plut-t border center-a" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}">
+            <i-icon type="picture_fill" size="28" class="_i-icon data-v-4dc50f08"></i-icon>
+          </view>
+          <view class="_p data-v-4dc50f08 font-sub text-oh text-center plut-b">照片</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

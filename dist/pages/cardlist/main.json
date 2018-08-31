@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "名片列表",
+  "usingComponents": {
+    "i-card": "../../dist/card/index",
+    "i-icon": "../../dist/icon/index",
+    "i-spin": "../../dist/spin/index"
+  }
+}

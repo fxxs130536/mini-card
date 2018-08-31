@@ -1,0 +1,10 @@
+<template name="index$e4c1ab6e">
+  <view class="_div data-v-b027c850 page app p-a-2">
+    <view class="_div data-v-b027c850 artical-t font-color-title"> 电商玩法升级，哥哥教你如何斩妖除魔，替天行道，拔刀不平，萍水相逢，知音难寻 </view>
+    <view class="_div data-v-b027c850 artical-company font-color-main m-y-2"> 印生活 </view>
+    <view class="_div data-v-b027c850 artical-cont"> 关关雎鸠，在河之洲。窈窕淑女，君子好逑。 参差荇菜，左右流之。窈窕淑女，寤寐求之。 求之不得，寤寐思服。悠哉悠哉，辗转反侧。 参差荇菜，左右采之。窈窕淑女，琴瑟友之。 参差荇菜，左右芼之。窈窕淑女，钟鼓乐之。 </view>
+    <view class="_div data-v-b027c850 call-btn">
+      <i-button i-class bindtap="handleProxy" type="primary" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_i-button data-v-b027c850">联系HR</i-button>
+    </view>
+  </view>
+</template>
