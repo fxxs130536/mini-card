@@ -90,15 +90,15 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(4);
 
 
 
@@ -133,8 +133,8 @@ if (false) {(function () {
       paintingList: [],
       shareImage: '',
 
-      mode: 'normal'
-
+      mode: 'normal',
+      qrCode: ''
     };
   },
 
@@ -150,10 +150,8 @@ if (false) {(function () {
   })),
 
   mounted: function mounted() {
-    console.log(this.shareCardInfo);
     this.paintingFn();
     this.qrCodeFn();
-    this.eventDraw();
   },
 
 
@@ -331,7 +329,7 @@ if (false) {(function () {
           bolder: false
         }, { // 小程序二维码
           type: 'image',
-          url: '../../static/assets/madePoster/addr.png',
+          url: this.qrCode, // '../../static/assets/madePoster/addr.png' ,
           top: 440,
           left: 235,
           width: 120,
@@ -345,6 +343,7 @@ if (false) {(function () {
         title: '绘制分享图片中',
         mask: true
       });
+
       var paintingList = this.paintingList;
       var paintingIndex = this.paintingIndex;
       this.mode = 'normal';
@@ -412,15 +411,18 @@ if (false) {(function () {
                 _context2.next = 2;
                 return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].get_qrCode({
                   url: 'pages/home/main',
-                  scene: ''
+                  scene: _this2.userInfo.strOpenId
                 });
 
               case 2:
                 qrCode = _context2.sent;
 
-                console.log(qrCode);
+                _this2.qrCode = qrCode.url || '../../static/assets/madePoster/addr.png';
+                // 要发布才有pages/home/main这个路径，才能生成二维码的
+                _this2.eventDraw();
+                // console.log(qrCode)
 
-              case 4:
+              case 5:
               case 'end':
                 return _context2.stop();
             }

@@ -10,7 +10,8 @@
     "pages/madePoster/main",
     "pages/officialWeb/main",
     "pages/shopCity/main",
-    "pages/shopDetails/main"
+    "pages/shopDetails/main",
+    "pages/transfer/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

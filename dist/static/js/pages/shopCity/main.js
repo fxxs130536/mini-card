@@ -14,7 +14,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MOD
 app.$mount();
 /* harmony default export */ __webpack_exports__["default"] = ({
   config: {
-    enablePullDownRefresh: false,
+    enablePullDownRefresh: true,
     navigationBarTitleText: '商城',
     'usingComponents': {
       'i-icon': '../../dist/icon/index',
@@ -90,15 +90,15 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(4);
 
 
 
@@ -163,7 +163,8 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
-      topBarShow: false
+      topBarShow: false,
+      products: ''
     };
   },
   onPageScroll: function onPageScroll(event) {
@@ -175,6 +176,10 @@ if (false) {(function () {
     }
   },
 
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.productList();
+    wx.stopPullDownRefresh();
+  },
   components: {},
 
   computed: __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_5_vuex__["b" /* mapGetters */])({
@@ -185,7 +190,9 @@ if (false) {(function () {
   })),
 
   mounted: function mounted() {
+    this.topBarShow = false;
     this.addShopLog();
+    this.productList();
   },
 
 
@@ -212,7 +219,7 @@ if (false) {(function () {
         }, _callee, _this);
       }))();
     },
-    goDetails: function goDetails(paras) {
+    goDetails: function goDetails(id, name) {
       var _this2 = this;
 
       return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
@@ -221,9 +228,9 @@ if (false) {(function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _this2.$router.push({ path: '/pages/shopDetails/main' });
-                Details = _this2.userInfo.strName + '查看了' + _this2.shareCardInfo.strName + '的公司商城的某某商品';
-                paramData = { 'Name': '查看了某个商城', 'Type': '106', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': _this2.openId, 'OperatedUserId': _this2.shareOpenId };
+                _this2.$router.push({ path: '/pages/shopDetails/main', query: { id: id } });
+                Details = _this2.userInfo.strName + '查看了' + _this2.shareCardInfo.strName + '公司商城的' + name;
+                paramData = { 'Name': '查看了产品', 'Type': '106', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': _this2.openId, 'OperatedUserId': _this2.shareOpenId };
                 _context2.next = 5;
                 return Object(__WEBPACK_IMPORTED_MODULE_4__http__["a" /* addEditLog */])(paramData);
 
@@ -233,6 +240,34 @@ if (false) {(function () {
             }
           }
         }, _callee2, _this2);
+      }))();
+    },
+    productList: function productList() {
+      var _this3 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+        var data, res;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                data = { '@CompanyId': _this3.shareCardInfo.CompanyId };
+                _context3.next = 3;
+                return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].get_Product_info(data);
+
+              case 3:
+                res = _context3.sent;
+
+                _this3.products = res.dgData;
+
+                // console.log(res)
+
+              case 5:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, _this3);
       }))();
     }
   }
@@ -258,7 +293,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "top-bar p-x-2"
   }, [_c('div', {
     staticClass: "top-bar-l fl text-oh  font-color-sub"
-  }, [_vm._v("加推科技商城")]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.shareCardInfo.strCompany) + "商城")]), _vm._v(" "), _c('div', {
     staticClass: "top-bar-r font-color-sub fr"
   }, [_c('i-icon', {
     staticClass: "p-a-1",
@@ -313,11 +348,19 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1)]), _vm._v(" "), _c('div', {
     staticClass: "shopTitle p-a-1  bgf"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
+    staticClass: "shop-logo center-a  radius"
+  }, [_c('img', {
+    staticClass: "radius",
+    attrs: {
+      "src": _vm.shareCardInfo.strAvatarUrl,
+      "alt": ""
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "shop-name"
   }, [_c('h4', {
     staticClass: "font-title bold"
-  }, [_vm._v("印生活科技商城")]), _vm._v(" "), _c('p', [_c('i-icon', {
+  }, [_vm._v(_vm._s(_vm.shareCardInfo.strCompany) + "商城")]), _vm._v(" "), _c('p', [_c('i-icon', {
     attrs: {
       "type": "task_fill",
       "color": "#2d8cf0",
@@ -328,22 +371,24 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "shop-list"
   }, [_c('ul', {
     staticClass: "p-y-2 p-x-1 clearfix"
-  }, _vm._l((5), function(items, index) {
+  }, _vm._l((_vm.products), function(items, index) {
     return _c('li', {
-      key: index,
+      key: items.id,
       staticClass: "shop-items oh radius bgf fl m-b-2",
       attrs: {
         "eventid": '0-' + index
       },
       on: {
-        "click": _vm.goDetails
+        "click": function($event) {
+          _vm.goDetails(items.Id, items.Name)
+        }
       }
     }, [_c('div', {
       staticClass: "shop-top center-a"
     }, [_c('img', {
       staticClass: "shop-img",
       attrs: {
-        "src": "https://i.loli.net/2017/08/21/599a521472424.jpg",
+        "src": items.CoverImage,
         "alt": ""
       }
     }), _vm._v(" "), _c('div', {
@@ -352,9 +397,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       staticClass: "p-a-1"
     }, [_c('p', {
       staticClass: "shop-desc text-oh-2 font-title"
-    }, [_vm._v("买了这产品一年买车两年买房三年赢取白富美从此走上人生巅峰！！！")]), _vm._v(" "), _c('p', {
+    }, [_vm._v(_vm._s(items.Name) + _vm._s('(' + items.ProductDetails + ')'))]), _vm._v(" "), _c('p', {
       staticClass: "shop-price  "
-    }, [_vm._v("¥ 1000")])], 1)])
+    }, [_vm._v("¥ " + _vm._s(items.SalePrice))])], 1)])
   }))], 1)], 1), _vm._v(" "), _c('i-divider', {
     attrs: {
       "content": "我是有底线的！",
@@ -362,17 +407,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1)
 }
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "shop-logo center-a  radius"
-  }, [_c('img', {
-    staticClass: "radius",
-    attrs: {
-      "src": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "alt": ""
-    }
-  })])
-}]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

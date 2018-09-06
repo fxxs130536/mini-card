@@ -16,9 +16,11 @@
 
         <swiper :indicator-dots="indicatorDots"
             :autoplay="autoplay" :interval="interval" :duration="duration" indicator-color="#fff" indicator-active-color="#2d8cf0" class="swiper radius oh">
-            <block v-for="(itmes,index) in imgUrls" :key="index" >
+            <block>
+            
                 <swiper-item>
-                <image  :src="itmes" class="slide-image " width="100%" height="100%"/>
+              
+                <image  :src="products.CoverImage" class="slide-image " width="100%" height="100%"/>
                 </swiper-item>
             </block>
         </swiper>
@@ -29,12 +31,12 @@
            
             </div>
             <div class=" font-title text-oh-2 bold m-t-2 m-b-1">
-                道可道非常道，名可名非常名道可道非常道，名可名非常名道可道非常道，名可名非常名
+               {{products.Name}}{{'('+products.ProductDetails+')'}}
             </div>
           <div class="header-b clearfix">
-              <p class="fl red bold">¥&nbsp;1000</p>
-              <p class="fr font-sub">运费：包邮</p>
-            </div>
+              <p class="fl red bold">¥&nbsp;{{products.SalePrice}}</p>
+              <!-- <p class="fr font-sub">运费：包邮</p> -->
+          </div>
         </header>
         <div class="details bgf">
             <h4 class="bold font-title text-center p-y-1 details-t ">商品详情</h4>
@@ -75,10 +77,11 @@ export default {
     return {
       topBarShow: false,
       imgUrls: [
-        'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      ]
+        // 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        // 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+        // 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+      ],
+      products: ''
     }
   },
   onPageScroll (event) {
@@ -93,17 +96,35 @@ export default {
     slideFull
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters({
+      shareCardInfo: 'shareCardInfo',
+      shareOpenId: 'shareOpenId',
+      openId: 'openId',
+      userInfo: 'userInfo'
+    })
+  },
 
   mounted () {
     this.topBarShow = false
+    this.getDetailsInfo()
   },
 
   methods: {
     goHome () {
       console.log(1)
       this.$router.go(1)
+    },
+    async getDetailsInfo () {
+      var id = this.$route.query.id
+
+      var data = {'@CompanyId': this.shareCardInfo.CompanyId, '@ProductId': id}
+      var res = await api.get_Product_info(data)
+      console.log(res)
+      this.products = res.dgData[0]
+      this.imgUrls = res.dgData[0].ImageArray
     }
+
   }
 }
 </script>

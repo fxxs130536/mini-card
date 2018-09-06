@@ -2,7 +2,7 @@
 <template>
   <div class='page app'>
       <swiper :indicator-dots="indicatorDots"
-            :autoplay="autoplay" :interval="interval" :duration="duration" indicator-color="#fff" indicator-active-color="#2d8cf0" class="swiper">
+            :autoplay="autoplay" :interval="interval" :duration="duration" indicator-color="#fff" indicator-active-color="#2d8cf0" class="swiper" v-if="imgUrls != ''">
             <block v-for="(itmes,index) in imgUrls" :key="index" >
                 <swiper-item>
                 <image  :src="itmes" class="slide-image" width="100%" height="100%"/>
@@ -10,17 +10,18 @@
             </block>
         </swiper>
         <div class="web-wrapper">
-        <div class="title bg font-title p-x-2 p-y-1 font-color">
-                    公司介绍
-                </div>
-                <div class="web-cont p-a-2 bgf m-a-2">
-                    <p class="font-title">加推</p>
-                    <p class="font-title">致力于提升企业销售效率</p>
-                    <p class="font">全球智能</p>
-                    <span>这是图片</span>
-                </div>
+            <div class="title bg font-title p-x-2 p-y-1 font-color">
+                        公司介绍
+            </div>
+            <div class="web-cont p-a-2 bgf m-a-2">
+                <!-- <p class="font-title">加推</p>
+                <p class="font-title">致力于提升企业销售效率</p>
+                <p class="font">全球智能</p>
+                <span>这是图片</span> -->
+                    <rich-text :nodes="companyInfo.BriefIntroduction" ></rich-text>
+            </div>
         </div>
-        <div class="web-wrapper">
+        <!-- <div class="web-wrapper">
             <div class="title bg font-title p-x-2 p-y-1 font-color">
                     产品介绍
                 </div>
@@ -30,7 +31,7 @@
                     <p class="font">全球智能</p>
                     <span>这是图片</span>
                 </div>
-        </div>
+        </div> -->
         <!-- 企业咨询 -->
          <div class="web-wrapper">
             <div class="title bg font-title p-x-2 p-y-1 font-color">
@@ -38,29 +39,33 @@
             </div>
            
             <ul class="m-l-2 tem-list">
-                <li class="tem-items p-y-2">
-                    <div class="tem-items-img">
-                    <img src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt="">
-                        
+                <li class="" v-for="(items,index) in consultArray" :key="items.id" >
+                
+                    <div @click="detailArtical(items.id,items.strTitle)" class="tem-items p-y-2">
+                        <div class="tem-items-img">
+                            <img :src="items.strTitleUrl" alt="">
+                                
+                            </div>
+                            <div class="tem-items-r p-x-1">
+                                    <p class="font-title m-b-2">
+                                        {{items.strTitle}}
+                                    </p>
+                                    <span class="font">{{items.dCreateTime}}</span>
+                            </div>
                     </div>
-                    <div class="tem-items-r p-x-1" @click="artical">
-                            <p class="font-title m-b-2">
-                                电商玩法升级， 电商玩法升级， 电商玩法升级， 电商玩法升级， 电商玩法升级，
-                            </p>
-                            <span class="font">2018-07-20</span>
-                    </div>
+                    
                 </li>
             </ul>
         </div>
          <!-- 公司视频 -->
-         <div class="web-wrapper">
+         <!-- <div class="web-wrapper">
             <div class="title bg font-title p-x-2 p-y-1 font-color">
                     公司视频
             </div>           
             <video class="video"  src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"  danmu-btn=false  controls objectFit ="fill" show-fullscreen-btn></video>
-        </div>
+        </div> -->
         <!-- 核心成员 -->
-         <div class="web-wrapper">
+         <!-- <div class="web-wrapper">
             <div class="title bg font-title p-x-2 p-y-1 font-color">
                     核心成员
             </div>           
@@ -105,11 +110,11 @@
                 </div>
                
             </i-col>
-    </i-row>
-        </div>
+            </i-row>
+        </div> -->
         <!-- 我们正在寻找 -->
 
-         <div class="web-wrapper">
+         <!-- <div class="web-wrapper">
             <div class="title bg font-title p-x-2 p-y-1 font-color">
                     我们正在寻找
             </div>
@@ -130,9 +135,9 @@
                  
             </i-row>
             </div>            
-        </div>   
+        </div>    -->
         <!-- 服务客户 -->
-        
+<!--         
          <div class="web-wrapper">
             <div class="title bg font-title p-x-2 p-y-1 font-color">
                     服务客户
@@ -151,57 +156,57 @@
                  
             </i-row>
             </div>
-        </div>
+        </div> -->
         <!-- 加入我们 -->
         
-         <div class="web-wrapper">
-            <div class="title bg font-title p-x-2 p-y-1 font-color">
-                    加入我们
-            </div>
-            <div class="web-cont  bgf p-a-2 radius">
-            <p class="font-title bold m-b-1">如果你有手有脚有颜值，会撸代码欢迎入坑！！！</p>
-             <i-row  i-class="join-list ">
-                 <i-col span="24" i-class="col-class join-items border p-x-1 p-y-2 center-y m-b-2" @click="joinUs"> 
-                        <div class="join-l fl">
-                            <h4 class="bold">java高级工程师</h4>
-                            <div class="join-ask">
-                                <span>薪资：20000</span>
-                                <span>经验：5</span>
-                                 <span>学历：本科</span>
+         <!-- <div class="web-wrapper">
+                <div class="title bg font-title p-x-2 p-y-1 font-color">
+                        加入我们
+                </div>
+                <div class="web-cont  bgf p-a-2 radius">
+                <p class="font-title bold m-b-1">如果你有手有脚有颜值，会撸代码欢迎入坑！！！</p>
+                <i-row  i-class="join-list ">
+                    <i-col span="24" i-class="col-class join-items border p-x-1 p-y-2 center-y m-b-2" @click="joinUs"> 
+                            <div class="join-l fl">
+                                <h4 class="bold">java高级工程师</h4>
+                                <div class="join-ask">
+                                    <span>薪资：20000</span>
+                                    <span>经验：5</span>
+                                    <span>学历：本科</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="join-r fr text-right">
-                            <i-icon type="enter" color="#495060" size="22" />
-                        </div>
-                 </i-col> 
+                            <div class="join-r fr text-right">
+                                <i-icon type="enter" color="#495060" size="22" />
+                            </div>
+                    </i-col> 
 
-            </i-row>
-            </div>
-            </div>
+                </i-row>
+                </div>
+            </div> -->
             <!-- 联系我们 -->
              <div class="web-wrapper">
                 <div class="title bg font-title p-x-2 p-y-1 font-color">
                         联系我们
                 </div>
             
-                <i-button @click="call('05780000888')" type="primary" size="default" i-class="m-x-2 bold font-size-title" >05780000888</i-button>
+                <i-button @click="call(companyInfo.TelPhone)" type="primary" size="default" i-class="m-x-2 bold font-size-title" >{{companyInfo.TelPhone}}</i-button>
             </div>
             <!-- 公司地址 -->
-             <div class="web-wrapper bg">
+             <div class="web-wrapper bg ">
                 <div class="title bg font-title p-x-2 p-y-1 font-color-sub">
                         公司地址
                 </div>
             
                 <div class="p-a-2">
                     
-                    <p class="font-title font-color-sub center-y ">
+                    <p class="font-title font-color-sub center-y p-y-2">
                         <i-icon type="coordinates_fill" color="#80848f" size="22"/>
-                        广东省佛山市阿呆多久单ad阿达i
+                        {{companyInfo.Street}}
                     </p>
-                    <footer class="text-center m-t-2 font-sub">
+                    <!-- <footer class="text-center m-t-2 font-sub">
                         <img class="footer-logo" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt="">
                         <p >印生活技术支持</p>
-                    </footer>
+                    </footer> -->
                 </div>
             </div>
   </div>
@@ -215,17 +220,23 @@ export default {
   data () {
     return {
       imgUrls: [
-        'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+        // 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        // 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+        // 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
       ],
       indicatorDots: true,
       autoplay: true,
       interval: 5000,
-      duration: 1000
+      duration: 1000,
+      companyInfo: {},
+      consultArray: []
+
     }
   },
-
+  onPullDownRefresh: function () {
+    this.company()
+    wx.stopPullDownRefresh()
+  },
   components: {},
 
   computed: {
@@ -239,6 +250,8 @@ export default {
 
   mounted () {
     this.addWebLog()
+    this.company()
+    this.consult()
   },
 
   methods: {
@@ -254,11 +267,36 @@ export default {
         phoneNumber: str
       })
     },
-    artical (obj) {
-      this.$router.push({ path: '/pages/advisoryDetails/main', query: { id: 1, title: '咨询详情' } })
-    },
     joinUs () {
       this.$router.push({ path: '/pages/advisoryDetails/main', query: { id: 1, title: '招聘详情' } })
+    },
+    async company () {
+      var data = {'@Id': '2'} // '@Id': this.shareCardInfo.CompanyId
+      //   console.log(this.shareCardInfo.CompanyId)
+      var res = await api.Get_VCarCompany(data)
+      this.companyInfo = res.dgData[0]
+      //   console.log(res)
+      if (res.dgData[0].ImageArray != null) this.imgUrls = JSON.parse(res.dgData[0].ImageArray)
+    },
+    async consult () {
+      var data = {
+        $rowIndex: 1
+      }
+      const res = await api.get_PropagandaColumn(data)
+      //   console.log(res)
+      if (res.dgData.length > 0) {
+        this.consultArray = res.dgData.filter(function (val, i, array) {
+          return i == 0
+        })
+      }
+    },
+    async detailArtical (id, artTitle) {
+      this.$router.push({ path: '/pages/advisoryDetails/main', query: { id: id, title: '公司动态详情' } })
+      var Details = this.userInfo.strName + '查阅了' + this.shareCardInfo.strName + '公司文章' + artTitle
+
+      var paramData = {'Name': '公司动态详情', 'Type': '109', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
+      await addEditLog(paramData)
     }
   }
 }
@@ -287,6 +325,7 @@ export default {
 }
 .tem-items{
     display: flex;
+    width: 100%;
     border-bottom: 1px solid #dddee1;
 }
 .tem-items-img{

@@ -46,17 +46,14 @@ export default {
       wx.setNavigationBarTitle({
         title: obj.title
       })
+      // console.log(obj)
       var _this = this
       var par = {
         '$rowIndex': 1,
         '$id': obj.id
       }
       const res = await api.get_PropagandaColumn(par)
-      console.log(res)
-      var item = res.dgData[0]
       this.news = res.dgData[0]
-
-      this.title = item.strTitle
       // this.news.newsauthor = item.dCreateTime
       // this.news.newssource = item.strName
       // this.news.detail = item.strContent

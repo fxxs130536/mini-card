@@ -29,8 +29,8 @@ export default {
       paintingList: [],
       shareImage: '',
 
-      mode: 'normal'
-
+      mode: 'normal',
+      qrCode: ''
     }
   },
 
@@ -47,10 +47,8 @@ export default {
   },
 
   mounted () {
-    console.log(this.shareCardInfo)
     this.paintingFn()
     this.qrCodeFn()
-    this.eventDraw()
   },
 
   methods: {
@@ -242,7 +240,7 @@ export default {
           },
           { // 小程序二维码
             type: 'image',
-            url: '../../static/assets/madePoster/addr.png',
+            url: this.qrCode, // '../../static/assets/madePoster/addr.png' ,
             top: 440,
             left: 235,
             width: 120,
@@ -257,6 +255,7 @@ export default {
         title: '绘制分享图片中',
         mask: true
       })
+
       const paintingList = this.paintingList
       const paintingIndex = this.paintingIndex
       this.mode = 'normal'
@@ -297,9 +296,12 @@ export default {
     async qrCodeFn () {
       const qrCode = await api.get_qrCode({
         url: 'pages/home/main',
-        scene: ''
+        scene: this.userInfo.strOpenId
       })
-      console.log(qrCode)
+      this.qrCode = qrCode.url || '../../static/assets/madePoster/addr.png'
+      // 要发布才有pages/home/main这个路径，才能生成二维码的
+      this.eventDraw()
+      // console.log(qrCode)
     }
 
   }

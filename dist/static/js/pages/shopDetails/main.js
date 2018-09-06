@@ -91,9 +91,20 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_api__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_slideFull__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_slideFull__ = __webpack_require__(56);
+
+
+
+//
+//
 //
 //
 //
@@ -170,7 +181,12 @@ if (false) {(function () {
   data: function data() {
     return {
       topBarShow: false,
-      imgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg']
+      imgUrls: [
+        // 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        // 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+        // 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+      ],
+      products: ''
     };
   },
   onPageScroll: function onPageScroll(event) {
@@ -183,13 +199,19 @@ if (false) {(function () {
   },
 
   components: {
-    slideFull: __WEBPACK_IMPORTED_MODULE_2__components_slideFull__["a" /* default */]
+    slideFull: __WEBPACK_IMPORTED_MODULE_5__components_slideFull__["a" /* default */]
   },
 
-  computed: {},
+  computed: __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapGetters */])({
+    shareCardInfo: 'shareCardInfo',
+    shareOpenId: 'shareOpenId',
+    openId: 'openId',
+    userInfo: 'userInfo'
+  })),
 
   mounted: function mounted() {
     this.topBarShow = false;
+    this.getDetailsInfo();
   },
 
 
@@ -197,6 +219,35 @@ if (false) {(function () {
     goHome: function goHome() {
       console.log(1);
       this.$router.go(1);
+    },
+    getDetailsInfo: function getDetailsInfo() {
+      var _this = this;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var id, data, res;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                id = _this.$route.query.id;
+                data = { '@CompanyId': _this.shareCardInfo.CompanyId, '@ProductId': id };
+                _context.next = 4;
+                return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].get_Product_info(data);
+
+              case 4:
+                res = _context.sent;
+
+                console.log(res);
+                _this.products = res.dgData[0];
+                _this.imgUrls = res.dgData[0].ImageArray;
+
+              case 8:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, _this);
+      }))();
     }
   }
 });
@@ -247,22 +298,18 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "indicator-color": "#fff",
       "indicator-active-color": "#2d8cf0"
     }
-  }, _vm._l((_vm.imgUrls), function(itmes, index) {
-    return _c('block', {
-      key: index
-    }, [_c('swiper-item', {
-      attrs: {
-        "mpcomid": '3-' + index
-      }
-    }, [_c('image', {
-      staticClass: "slide-image ",
-      attrs: {
-        "src": itmes,
-        "width": "100%",
-        "height": "100%"
-      }
-    })])], 1)
-  })), _vm._v(" "), _c('div', {
+  }, [_c('block', [_c('swiper-item', {
+    attrs: {
+      "mpcomid": '3'
+    }
+  }, [_c('image', {
+    staticClass: "slide-image ",
+    attrs: {
+      "src": _vm.products.CoverImage,
+      "width": "100%",
+      "height": "100%"
+    }
+  })])], 1)], 1), _vm._v(" "), _c('div', {
     staticClass: "nav-right clearfix"
   }, [_c('i-icon', {
     staticClass: "center-a",
@@ -287,13 +334,11 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: " font-title text-oh-2 bold m-t-2 m-b-1"
-  }, [_vm._v("\n              道可道非常道，名可名非常名道可道非常道，名可名非常名道可道非常道，名可名非常名\n          ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n             " + _vm._s(_vm.products.Name) + _vm._s('(' + _vm.products.ProductDetails + ')') + "\n          ")]), _vm._v(" "), _c('div', {
     staticClass: "header-b clearfix"
   }, [_c('p', {
     staticClass: "fl red bold"
-  }, [_vm._v("¥ 1000")]), _vm._v(" "), _c('p', {
-    staticClass: "fr font-sub"
-  }, [_vm._v("运费：包邮")])], 1)], 1), _vm._v(" "), _c('div', {
+  }, [_vm._v("¥ " + _vm._s(_vm.products.SalePrice))])], 1)], 1), _vm._v(" "), _c('div', {
     staticClass: "details bgf"
   }, [_c('h4', {
     staticClass: "bold font-title text-center p-y-1 details-t "

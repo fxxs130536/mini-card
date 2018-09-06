@@ -20,6 +20,7 @@
 }
 .tem-items.data-v-37f3800f {
   display: flex;
+  width: 100%;
   border-bottom: 2rpx solid #dddee1;
 }
 .tem-items-img.data-v-37f3800f {

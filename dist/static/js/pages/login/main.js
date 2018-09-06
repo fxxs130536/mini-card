@@ -13,16 +13,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_1__index__["a" /* default */]);
 app.$mount();
-/* harmony default export */ __webpack_exports__["default"] = ({
-  config: {
-    navigationBarTitleText: '授权登录',
-    'usingComponents': {
-      'i-button': '../../dist/button/index',
-      'i-spin': '../../dist/spin/index'
-    }
-
-  }
-});
 
 /***/ }),
 
@@ -91,8 +81,17 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_api__ = __webpack_require__(4);
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(4);
+
+
+
 //
 //
 //
@@ -109,55 +108,71 @@ if (false) {(function () {
 //
 //
 
-// import store from '@/store/store'
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
-      canIUse: false,
-      getInfoShow: false
-
+      imgsrc: '../../static/assets/login.png',
+      scene: ''
     };
   },
 
-  computed: {},
+  computed: __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapGetters */])({
+    shareCardInfo: 'shareCardInfo',
+    openId: 'openId',
+    shareOpenId: 'shareOpenId',
+    userInfo: 'userInfo'
+  })),
   mounted: function mounted() {
-    this.canIUse = wx.canIUse('button.open-type.getUserInfo');
-    if (this.$route.query.scopeInfo) {
-      this.getInfoShow = true;
-    }
+    var scene = this.$route.query;
+    this.scene = scene.scene;
   },
 
   methods: {
-    bindGetUserInfo: function bindGetUserInfo(e) {
-      if (e.mp.detail.userInfo) {
-        this.backPath();
-        // 用户按了允许授权按钮
-      } else {
-        // 用户按了拒绝按钮
-        console.log(e.mp.detail.errMsg);
-      }
+    login: function login() {
+      var _this2 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var _this, par, data;
+
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this = _this2;
+                par = {
+                  strOpenId: _this2.openId,
+                  scene: _this2.scene
+                };
+
+                wx.showLoading({ title: '正在登录网页' });
+                _context.next = 5;
+                return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].get_author_login(par);
+
+              case 5:
+                data = _context.sent;
+
+                wx.hideLoading();
+                try {
+                  __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].wxToast({ title: '登录网页成功', icon: 'success' });
+                  setTimeout(function () {
+                    _this.backHome();
+                  }, 2000);
+                } catch (error) {
+                  __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].wxToast({ title: '登录网页失败' });
+                }
+
+              case 8:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, _this2);
+      }))();
     },
-    backPath: function backPath() {
-      var query = this.$route.query;
-      // console.log(query.target)
-      if (query.shareOpenId) {
-        this.$store.commit('shareOpenId', query.shareOpenId);
-      }
-      switch (query.type) {
-        case 'new':
-          this.$router.push({ path: query.target, reLaunch: true });
-          break;
-        case 'tab':
-          this.$router.push({ path: query.target, isTab: true });
-          break;
-        default:
-          // this.$router.push({ path: query.target, reLaunch: true })
-          this.$router.replace({ path: query.target }); // 关闭当前页
-          // this.$router.push({ path: query.target })
-          break;
-      }
+    backHome: function backHome() {
+      this.$router.push({ path: '/pages/home/main', isTab: true });
     }
   },
   created: function created() {}
@@ -171,37 +186,39 @@ if (false) {(function () {
 "use strict";
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "page app"
-  }, [_vm._m(0), _vm._v(" "), (_vm.getInfoShow) ? _c('div', {
-    staticClass: "getInfo"
-  }, [(_vm.canIUse) ? _c('i-button', {
-    attrs: {
-      "open-type": "getUserInfo",
-      "type": "primary",
-      "eventid": '0',
-      "mpcomid": '0'
-    },
-    on: {
-      "getuserinfo": _vm.bindGetUserInfo
-    }
-  }, [_vm._v("授权登录")]) : _c('view', [_vm._v("请升级微信版本")])], 1) : _c('i-spin', {
-    attrs: {
-      "size": "large",
-      "fix": "",
-      "mpcomid": '1'
-    }
-  })], 1)
-}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+    staticClass: "page"
+  }, [_c('div', {
     staticClass: "login-img"
   }, [_c('img', {
     staticClass: "login-src",
     attrs: {
-      "src": "/../../static/assets/login.png"
+      "src": _vm.imgsrc
     }
-  })])
-}]
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "weui-btn-area sub"
+  }, [_c('button', {
+    staticClass: "weui-btn btn-defalut",
+    attrs: {
+      "hover-class": "btn-hover",
+      "eventid": '0'
+    },
+    on: {
+      "click": _vm.login
+    }
+  }, [_vm._v("登录")])], 1), _vm._v(" "), _c('div', {
+    staticClass: "weui-btn-area sub"
+  }, [_c('button', {
+    staticClass: "weui-btn ",
+    attrs: {
+      "hover-class": "btn-hover",
+      "eventid": '1'
+    },
+    on: {
+      "click": _vm.backHome
+    }
+  }, [_vm._v("返回首页")])], 1)])
+}
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

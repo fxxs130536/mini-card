@@ -13,7 +13,7 @@ fly.interceptors.request.use((request) => {
   // 给所有请求添加自定义header
 //   request.headers['X-Tag'] = 'flyio'
   // 打印出请求体
-  console.log(request.body)
+  // console.log(request.body)
   // 终止请求
   // var err=new Error("xxx")
   // err.request=request

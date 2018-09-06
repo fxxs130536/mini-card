@@ -1,7 +1,8 @@
 <!--  -->
 <template>
   <div class='page app bgf' @click="actionShow = false;sendShow=false">
-      <div class="find-wrapper p-a-2 find-list" v-for="(items,index) in news.newslist" :key="items.newsid">
+      <div v-if="news.newslist != '' ||news.newslist != '[]' ">
+      <div   class="find-wrapper p-a-2 find-list" v-for="(items,index) in news.newslist" :key="items.newsid">
           <i-row i-class=" ">
             <i-col span="4" i-class="col-class ">
                 <img class="find-img" :src="items.strTitleUrl" alt="">
@@ -12,7 +13,7 @@
                     <h4 class="font-color-main font-title bold text-oh fl find-header-1 p-r-1">{{items.strText}}</h4>
                     <p class="border p-x-1 text-oh fl find-header-2">公司</p>
                    
-                    <button class="font-color-main text-oh fr find-header-3 text-right shareBtn" open-type="share" data-id="111" >转发</button>
+                    <button class="font-color-main text-oh fr find-header-3 text-right shareBtn" open-type="share" :data-id="items.id" :data-strTitle="items.strTitle" :data-img="items.strTitleUrl">转发</button>
 
                 </div>
                 <div class="find-body">
@@ -64,6 +65,8 @@
         </i-row>
           
       </div>
+      </div>
+      <div v-else class="text-center m-a-2">空空余也！</div>
       <div class="send-comment clearfix p-x-2 p-b-1" v-if="sendShow" @click.stop>
         
               <div class="send-comment-inp border fl m-r-1">
@@ -102,12 +105,17 @@ export default {
     }
   },
   onShareAppMessage (e) {
-    console.log(e.target.dataset.id)
+    console.log(e)
+
+    var id = e.target.dataset.id
+    var artTitle = e.target.dataset.strTitle
+    var img = e.target.dataset.img
+    var para = {id: id, title: '公司动态详情', type: 'share'}
+    var title = '转发' + artTitle + '文章'
     return {
       title: '转发文章',
-      desc: '这是我的名片请惠存',
-      //   imageUrl: this.cardInfo.strAvatarUrl,
-      path: '/pages/advisoryDetails/main?strOpenId_b=' + this.sharePara.ab,
+      imageUrl: img,
+      path: '/pages/transfer/main?shareOpenId=' + this.shareOpenId + '&target=/pages/advisoryDetails/main' + '&para=' + para,
       success: function (res) {
         console.log(res)
       },
@@ -122,13 +130,11 @@ export default {
     this.getData()
   },
   onReachBottom (e) {
-    console.log(e)
-
     wx.showLoading({
       title: '玩命加载中'
     })
-    wx.hideLoading()
     this.getData()
+    wx.hideLoading()
   },
 
   components: {},
@@ -157,7 +163,6 @@ export default {
       await addEditLog(paramData)
     },
     async getData () {
-      console.log(11)
       var _this = this
       this.par['$rowIndex']++
       const res = await api.get_PropagandaColumn(this.par)

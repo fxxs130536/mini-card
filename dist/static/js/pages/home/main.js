@@ -1,13 +1,13 @@
-global.webpackJsonp([3],{
+global.webpackJsonp([10],{
 
-/***/ 131:
+/***/ 137:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(138);
 
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_1__index__["a" /* default */]);
@@ -31,16 +31,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 132:
+/***/ 138:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_40c71862_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(144);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(133)
+  __webpack_require__(139)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -85,30 +85,35 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 133:
+/***/ 139:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 134:
+/***/ 140:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_slideFull__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_slideFull__ = __webpack_require__(56);
 
 
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -326,10 +331,11 @@ if (false) {(function () {
   onShareAppMessage: function onShareAppMessage() {
     var _this = this;
 
+    var url = this.$route.path;
     return {
       title: this.cardInfo.strName + '名片',
       imageUrl: this.cardInfo.strAvatarUrl,
-      path: '/pages/home/main?strOpenId_b=' + this.openId,
+      path: '/pages/transfer/main?shareOpenId=' + this.shareOpenId + '&target=' + url + '&type=tab',
       success: function () {
         var _ref = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee(res) {
           var Details, paramData;
@@ -337,10 +343,11 @@ if (false) {(function () {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
+                  // console.log(res)
                   Details = _this.userInfo.strName + '分享了' + _this.shareCardInfo.strName + '的名片';
                   paramData = { 'Name': '分享名片', 'Type': '101', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': _this.openId, 'OperatedUserId': _this.shareOpenId };
                   _context.next = 4;
-                  return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].post_aad_log(paramData);
+                  return Object(__WEBPACK_IMPORTED_MODULE_4__http__["a" /* addEditLog */])(paramData);
 
                 case 4:
                 case 'end':
@@ -354,7 +361,9 @@ if (false) {(function () {
           return _ref.apply(this, arguments);
         };
       }(),
-      fail: function fail(res) {}
+      fail: function fail(res) {
+        console.log(res);
+      }
     };
   },
 
@@ -465,15 +474,22 @@ if (false) {(function () {
 
               case 3:
                 res = _context5.sent;
+
+                if (_this5.cardInfo.isLike) {
+                  _context5.next = 9;
+                  break;
+                }
+
                 Details = _this5.userInfo.strName + '点赞了' + _this5.shareCardInfo.strName + '的名片';
                 paramData = { 'Name': '点赞名片', 'Type': '100', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': _this5.openId, 'OperatedUserId': _this5.shareOpenId };
-                _context5.next = 8;
+                _context5.next = 9;
                 return Object(__WEBPACK_IMPORTED_MODULE_4__http__["a" /* addEditLog */])(paramData);
 
-              case 8:
+              case 9:
+
                 _this5.getCardInfo();
 
-              case 9:
+              case 10:
               case 'end':
                 return _context5.stop();
             }
@@ -485,7 +501,7 @@ if (false) {(function () {
       var _this6 = this;
 
       this.$wxapi.makePhoneCall({
-        phoneNumber: str
+        phoneNumber: '13553699106'
       }).then(function () {
         var _ref2 = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee6(res) {
           var Details, paramData;
@@ -685,6 +701,13 @@ if (false) {(function () {
     },
     sendInfo: function sendInfo() {
       this.$router.push({ path: '/pages/chat/main', query: { id: 'caixia' } });
+    },
+    scanQr: function scanQr() {
+      this.$wxapi.scanCode({
+        scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417']
+      }).then(function (res) {
+        console.log(res);
+      }).catch(function (res) {});
     }
   }
 });
@@ -1139,24 +1162,24 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   }) : _c('p', {
     staticClass: "font-sub text-center p-y-1"
-  }, [_vm._v("照片空空如也")])], 1), _vm._v(" "), _c('button', {
+  }, [_vm._v("照片空空如也")])], 1), _vm._v(" "), _c('div', {
     staticClass: "send-msg text-center border",
     attrs: {
       "eventid": '11'
     },
     on: {
-      "click": _vm.sendInfo
+      "click": _vm.scanQr
     }
   }, [_c('i-icon', {
     attrs: {
-      "type": "brush",
+      "type": "scan",
       "size": "18",
       "color": "#2d8cf0",
       "mpcomid": '36'
     }
   }), _vm._v(" "), _c('p', {
     staticClass: "font-mini"
-  }, [_vm._v("留言")])], 1), _vm._v(" "), _c('i-divider', {
+  }, [_vm._v("扫码")])], 1), _vm._v(" "), _c('i-divider', {
     attrs: {
       "content": "我是有底线的！",
       "mpcomid": '37'
@@ -1198,5 +1221,5 @@ if (false) {
 
 /***/ })
 
-},[131]);
+},[137]);
 //# sourceMappingURL=main.js.map

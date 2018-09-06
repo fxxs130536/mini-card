@@ -1,5 +1,5 @@
 {
-  "enablePullDownRefresh": false,
+  "enablePullDownRefresh": true,
   "navigationBarTitleText": "商城",
   "usingComponents": {
     "i-icon": "../../dist/icon/index",

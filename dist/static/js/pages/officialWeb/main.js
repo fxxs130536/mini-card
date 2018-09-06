@@ -14,7 +14,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MOD
 app.$mount();
 /* harmony default export */ __webpack_exports__["default"] = ({
   config: {
-    enablePullDownRefresh: false,
+    enablePullDownRefresh: true,
     navigationBarTitleText: '官网',
     'usingComponents': {
       'i-panel': '../../dist/panel/index',
@@ -94,18 +94,23 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(4);
 
 
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -322,15 +327,25 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
-      imgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'],
+      imgUrls: [
+        // 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        // 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+        // 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+      ],
       indicatorDots: true,
       autoplay: true,
       interval: 5000,
-      duration: 1000
+      duration: 1000,
+      companyInfo: {},
+      consultArray: []
+
     };
   },
 
-
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.company();
+    wx.stopPullDownRefresh();
+  },
   components: {},
 
   computed: __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_5_vuex__["b" /* mapGetters */])({
@@ -342,6 +357,8 @@ if (false) {(function () {
 
   mounted: function mounted() {
     this.addWebLog();
+    this.company();
+    this.consult();
   },
 
 
@@ -373,11 +390,94 @@ if (false) {(function () {
         phoneNumber: str
       });
     },
-    artical: function artical(obj) {
-      this.$router.push({ path: '/pages/advisoryDetails/main', query: { id: 1, title: '咨询详情' } });
-    },
     joinUs: function joinUs() {
       this.$router.push({ path: '/pages/advisoryDetails/main', query: { id: 1, title: '招聘详情' } });
+    },
+    company: function company() {
+      var _this2 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var data, res;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                data = { '@Id': '2' // '@Id': this.shareCardInfo.CompanyId
+                  //   console.log(this.shareCardInfo.CompanyId)
+                };
+                _context2.next = 3;
+                return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].Get_VCarCompany(data);
+
+              case 3:
+                res = _context2.sent;
+
+                _this2.companyInfo = res.dgData[0];
+                //   console.log(res)
+                if (res.dgData[0].ImageArray != null) _this2.imgUrls = JSON.parse(res.dgData[0].ImageArray);
+
+              case 6:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, _this2);
+      }))();
+    },
+    consult: function consult() {
+      var _this3 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+        var data, res;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                data = {
+                  $rowIndex: 1
+                };
+                _context3.next = 3;
+                return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].get_PropagandaColumn(data);
+
+              case 3:
+                res = _context3.sent;
+
+                //   console.log(res)
+                if (res.dgData.length > 0) {
+                  _this3.consultArray = res.dgData.filter(function (val, i, array) {
+                    return i == 0;
+                  });
+                }
+
+              case 5:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, _this3);
+      }))();
+    },
+    detailArtical: function detailArtical(id, artTitle) {
+      var _this4 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
+        var Details, paramData;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this4.$router.push({ path: '/pages/advisoryDetails/main', query: { id: id, title: '公司动态详情' } });
+                Details = _this4.userInfo.strName + '查阅了' + _this4.shareCardInfo.strName + '公司文章' + artTitle;
+                paramData = { 'Name': '公司动态详情', 'Type': '109', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': _this4.openId, 'OperatedUserId': _this4.shareOpenId };
+                _context4.next = 5;
+                return Object(__WEBPACK_IMPORTED_MODULE_4__http__["a" /* addEditLog */])(paramData);
+
+              case 5:
+              case 'end':
+                return _context4.stop();
+            }
+          }
+        }, _callee4, _this4);
+      }))();
     }
   }
 });
@@ -391,7 +491,7 @@ if (false) {(function () {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "page app"
-  }, [_c('swiper', {
+  }, [(_vm.imgUrls != '') ? _c('swiper', {
     staticClass: "swiper",
     attrs: {
       "indicator-dots": _vm.indicatorDots,
@@ -416,298 +516,85 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         "height": "100%"
       }
     })])], 1)
-  })), _vm._v(" "), _c('div', {
+  })) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "web-wrapper"
   }, [_c('div', {
     staticClass: "title bg font-title p-x-2 p-y-1 font-color"
-  }, [_vm._v("\n                  公司介绍\n              ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        公司介绍\n            ")]), _vm._v(" "), _c('div', {
     staticClass: "web-cont p-a-2 bgf m-a-2"
-  }, [_c('p', {
-    staticClass: "font-title"
-  }, [_vm._v("加推")]), _vm._v(" "), _c('p', {
-    staticClass: "font-title"
-  }, [_vm._v("致力于提升企业销售效率")]), _vm._v(" "), _c('p', {
-    staticClass: "font"
-  }, [_vm._v("全球智能")]), _vm._v(" "), _c('span', [_vm._v("这是图片")])], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "web-wrapper"
-  }, [_c('div', {
-    staticClass: "title bg font-title p-x-2 p-y-1 font-color"
-  }, [_vm._v("\n                  产品介绍\n              ")]), _vm._v(" "), _c('div', {
-    staticClass: "web-cont p-a-2 bgf m-a-2"
-  }, [_c('p', {
-    staticClass: "font-title"
-  }, [_vm._v("不至于领先")]), _vm._v(" "), _c('p', {
-    staticClass: "font-title"
-  }, [_vm._v("致力于提升企业销售效率")]), _vm._v(" "), _c('p', {
-    staticClass: "font"
-  }, [_vm._v("全球智能")]), _vm._v(" "), _c('span', [_vm._v("这是图片")])], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "web-wrapper"
-  }, [_c('div', {
-    staticClass: "title bg font-title p-x-2 p-y-1 font-color"
-  }, [_vm._v("\n                  企业咨询\n          ")]), _vm._v(" "), _c('ul', {
-    staticClass: "m-l-2 tem-list"
-  }, [_c('li', {
-    staticClass: "tem-items p-y-2"
-  }, [_c('div', {
-    staticClass: "tem-items-img"
-  }, [_c('img', {
+  }, [_c('rich-text', {
     attrs: {
-      "src": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "alt": ""
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "tem-items-r p-x-1",
-    attrs: {
-      "eventid": '0'
-    },
-    on: {
-      "click": _vm.artical
-    }
-  }, [_c('p', {
-    staticClass: "font-title m-b-2"
-  }, [_vm._v("\n                              电商玩法升级， 电商玩法升级， 电商玩法升级， 电商玩法升级， 电商玩法升级，\n                          ")]), _vm._v(" "), _c('span', {
-    staticClass: "font"
-  }, [_vm._v("2018-07-20")])], 1)])], 1)], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "web-wrapper"
-  }, [_c('div', {
-    staticClass: "title bg font-title p-x-2 p-y-1 font-color"
-  }, [_vm._v("\n                  核心成员\n          ")]), _vm._v(" "), _c('i-row', {
-    attrs: {
-      "type": _vm.flex,
-      "i-class": "teams m-x-1 m-y-2",
-      "mpcomid": '4'
-    }
-  }, [_c('i-col', {
-    attrs: {
-      "span": 12,
-      "i-class": "col-class m-b-2 p-x-1",
+      "nodes": _vm.companyInfo.BriefIntroduction,
       "mpcomid": '1'
     }
-  }, [_c('div', {
-    staticClass: "teams-img"
-  }, [_c('img', {
-    attrs: {
-      "src": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "alt": ""
-    }
-  })]), _vm._v(" "), _c('h4', {
-    staticClass: "font-title teams-name"
-  }, [_vm._v("刘德华")]), _vm._v(" "), _c('p', {
-    staticClass: "teams-post font-title"
-  }, [_vm._v("打扫厕所")]), _vm._v(" "), _c('div', {
-    staticClass: "teams-divider m-y-1"
-  }), _vm._v(" "), _c('p', {
-    staticClass: "teams-p"
-  }, [_vm._v("前微信扫地王")]), _vm._v(" "), _c('p', {
-    staticClass: "teams-p"
-  }, [_vm._v("前阿里挑粪王前阿里挑粪")]), _vm._v(" "), _c('p', {
-    staticClass: "teams-p"
-  }, [_vm._v("前阿里挑粪王前阿里挑粪王")])], 1), _vm._v(" "), _c('i-col', {
-    attrs: {
-      "span": 12,
-      "i-class": "col-class m-b-2 p-x-1",
-      "mpcomid": '2'
-    }
-  }, [_c('div', {
-    staticClass: "teams-img"
-  }, [_c('img', {
-    attrs: {
-      "src": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "alt": ""
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "teams-r p-x-1"
-  }, [_c('h4', {
-    staticClass: "font-title teams-name"
-  }, [_vm._v("刘德华")]), _vm._v(" "), _c('p', {
-    staticClass: "teams-post font-title"
-  }, [_vm._v("打扫厕所")]), _vm._v(" "), _c('div', {
-    staticClass: "teams-divider m-y-1"
-  }), _vm._v(" "), _c('p', {
-    staticClass: "teams-p"
-  }, [_vm._v("前微信扫地王")]), _vm._v(" "), _c('p', {
-    staticClass: "teams-p"
-  }, [_vm._v("前阿里挑粪王前阿里挑粪")]), _vm._v(" "), _c('p', {
-    staticClass: "teams-p"
-  }, [_vm._v("前阿里挑粪王前阿里挑粪王")])], 1)]), _vm._v(" "), _c('i-col', {
-    attrs: {
-      "span": 12,
-      "i-class": "col-class m-b-2 p-x-1",
-      "mpcomid": '3'
-    }
-  }, [_c('div', {
-    staticClass: "teams-img"
-  }, [_c('img', {
-    attrs: {
-      "src": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "alt": ""
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "teams-r p-x-1"
-  }, [_c('h4', {
-    staticClass: "font-title teams-name"
-  }, [_vm._v("刘德华")]), _vm._v(" "), _c('p', {
-    staticClass: "teams-post font-title"
-  }, [_vm._v("打扫厕所")]), _vm._v(" "), _c('div', {
-    staticClass: "teams-divider m-y-1"
-  }), _vm._v(" "), _c('p', {
-    staticClass: "teams-p"
-  }, [_vm._v("前微信扫地王")]), _vm._v(" "), _c('p', {
-    staticClass: "teams-p"
-  }, [_vm._v("前阿里挑粪王前阿里挑粪")]), _vm._v(" "), _c('p', {
-    staticClass: "teams-p"
-  }, [_vm._v("前阿里挑粪王前阿里挑粪adadada王")])], 1)])], 1)], 1), _vm._v(" "), _c('div', {
+  })], 1)]), _vm._v(" "), _c('div', {
     staticClass: "web-wrapper"
   }, [_c('div', {
     staticClass: "title bg font-title p-x-2 p-y-1 font-color"
-  }, [_vm._v("\n                  我们正在寻找\n          ")]), _vm._v(" "), _c('div', {
-    staticClass: "web-cont  bgf m-a-2 radius"
-  }, [_c('i-row', {
-    attrs: {
-      "i-class": "look-list p-x-1  p-y-2",
-      "mpcomid": '6'
-    }
-  }, _vm._l((4), function(items, index) {
-    return _c('i-col', {
-      key: index,
+  }, [_vm._v("\n                    企业咨询\n            ")]), _vm._v(" "), _c('ul', {
+    staticClass: "m-l-2 tem-list"
+  }, _vm._l((_vm.consultArray), function(items, index) {
+    return _c('li', {
+      key: items.id
+    }, [_c('div', {
+      staticClass: "tem-items p-y-2",
       attrs: {
-        "span": "12",
-        "i-class": "col-class look-items p-x-1 m-b-2",
-        "mpcomid": '5-' + index
+        "eventid": '0-' + index
+      },
+      on: {
+        "click": function($event) {
+          _vm.detailArtical(items.id, items.strTitle)
+        }
       }
     }, [_c('div', {
-      staticClass: "radius look-wrapper center-a",
-      style: ({
-        background: '#ed3f14'
-      })
-    }, [_c('div', {}, [_c('p', [_vm._v("拥有丰富")]), _vm._v(" "), _c('p', [_vm._v("企业资源")]), _vm._v(" "), _c('p', [_vm._v("渠道合作伙伴")])], 1)])])
-  }))], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "web-wrapper"
-  }, [_c('div', {
-    staticClass: "title bg font-title p-x-2 p-y-1 font-color"
-  }, [_vm._v("\n                  服务客户\n          ")]), _vm._v(" "), _c('div', {
-    staticClass: "web-cont  bgf m-a-2 radius p-y-2"
-  }, [_c('p', {
-    staticClass: "font-title bold"
-  }, [_vm._v("全国30+行业")]), _vm._v(" "), _c('p', {
-    staticClass: "font-title bold"
-  }, [_vm._v("700+品牌已选择加推")]), _vm._v(" "), _c('i-row', {
-    attrs: {
-      "i-class": "look-list p-x-1  p-y-2 server-lsit",
-      "mpcomid": '8'
-    }
-  }, _vm._l((4), function(items, index) {
-    return _c('i-col', {
-      key: index,
-      attrs: {
-        "span": "6",
-        "i-class": "col-class look-items p-x-1 m-b-2 server-items",
-        "mpcomid": '7-' + index
-      }
-    }, [_c('div', {
-      staticClass: "radius server-wrapper"
+      staticClass: "tem-items-img"
     }, [_c('img', {
       attrs: {
-        "src": "https://i.loli.net/2017/08/21/599a521472424.jpg",
+        "src": items.strTitleUrl,
         "alt": ""
       }
-    })])])
-  }))], 1)]), _vm._v(" "), _c('div', {
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "tem-items-r p-x-1"
+    }, [_c('p', {
+      staticClass: "font-title m-b-2"
+    }, [_vm._v("\n                                        " + _vm._s(items.strTitle) + "\n                                    ")]), _vm._v(" "), _c('span', {
+      staticClass: "font"
+    }, [_vm._v(_vm._s(items.dCreateTime))])], 1)])])
+  }))], 1), _vm._v(" "), _c('div', {
     staticClass: "web-wrapper"
   }, [_c('div', {
     staticClass: "title bg font-title p-x-2 p-y-1 font-color"
-  }, [_vm._v("\n                  加入我们\n          ")]), _vm._v(" "), _c('div', {
-    staticClass: "web-cont  bgf p-a-2 radius"
-  }, [_c('p', {
-    staticClass: "font-title bold m-b-1"
-  }, [_vm._v("如果你有手有脚有颜值，会撸代码欢迎入坑！！！")]), _vm._v(" "), _c('i-row', {
-    attrs: {
-      "i-class": "join-list ",
-      "mpcomid": '11'
-    }
-  }, [_c('i-col', {
-    attrs: {
-      "span": "24",
-      "i-class": "col-class join-items border p-x-1 p-y-2 center-y m-b-2",
-      "eventid": '1',
-      "mpcomid": '10'
-    },
-    on: {
-      "click": _vm.joinUs
-    }
-  }, [_c('div', {
-    staticClass: "join-l fl"
-  }, [_c('h4', {
-    staticClass: "bold"
-  }, [_vm._v("java高级工程师")]), _vm._v(" "), _c('div', {
-    staticClass: "join-ask"
-  }, [_c('span', [_vm._v("薪资：20000")]), _vm._v(" "), _c('span', [_vm._v("经验：5")]), _vm._v(" "), _c('span', [_vm._v("学历：本科")])])], 1), _vm._v(" "), _c('div', {
-    staticClass: "join-r fr text-right"
-  }, [_c('i-icon', {
-    attrs: {
-      "type": "enter",
-      "color": "#495060",
-      "size": "22",
-      "mpcomid": '9'
-    }
-  })], 1)])], 1)], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "web-wrapper"
-  }, [_c('div', {
-    staticClass: "title bg font-title p-x-2 p-y-1 font-color"
-  }, [_vm._v("\n                      联系我们\n              ")]), _vm._v(" "), _c('i-button', {
+  }, [_vm._v("\n                        联系我们\n                ")]), _vm._v(" "), _c('i-button', {
     attrs: {
       "type": "primary",
       "size": "default",
       "i-class": "m-x-2 bold font-size-title",
-      "eventid": '2',
-      "mpcomid": '12'
+      "eventid": '1',
+      "mpcomid": '2'
     },
     on: {
       "click": function($event) {
-        _vm.call('05780000888')
+        _vm.call(_vm.companyInfo.TelPhone)
       }
     }
-  }, [_vm._v("05780000888")])], 1), _vm._v(" "), _c('div', {
-    staticClass: "web-wrapper bg"
+  }, [_vm._v(_vm._s(_vm.companyInfo.TelPhone))])], 1), _vm._v(" "), _c('div', {
+    staticClass: "web-wrapper bg "
   }, [_c('div', {
     staticClass: "title bg font-title p-x-2 p-y-1 font-color-sub"
-  }, [_vm._v("\n                      公司地址\n              ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                        公司地址\n                ")]), _vm._v(" "), _c('div', {
     staticClass: "p-a-2"
   }, [_c('p', {
-    staticClass: "font-title font-color-sub center-y "
+    staticClass: "font-title font-color-sub center-y p-y-2"
   }, [_c('i-icon', {
     attrs: {
       "type": "coordinates_fill",
       "color": "#80848f",
       "size": "22",
-      "mpcomid": '13'
+      "mpcomid": '3'
     }
-  }), _vm._v("\n                      广东省佛山市阿呆多久单ad阿达i\n                  ")], 1), _vm._v(" "), _c('footer', {
-    staticClass: "text-center m-t-2 font-sub"
-  }, [_c('img', {
-    staticClass: "footer-logo",
-    attrs: {
-      "src": "https://i.loli.net/2017/08/21/599a521472424.jpg",
-      "alt": ""
-    }
-  }), _vm._v(" "), _c('p', [_vm._v("印生活技术支持")])], 1)], 1)])], 1)
+  }), _vm._v("\n                        " + _vm._s(_vm.companyInfo.Street) + "\n                    ")], 1)], 1)])], 1)
 }
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "web-wrapper"
-  }, [_c('div', {
-    staticClass: "title bg font-title p-x-2 p-y-1 font-color"
-  }, [_vm._v("\n                  公司视频\n          ")]), _vm._v(" "), _c('video', {
-    staticClass: "video",
-    attrs: {
-      "src": "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
-      "danmu-btn": "false",
-      "controls": "",
-      "objectFit": "fill",
-      "show-fullscreen-btn": ""
-    }
-  })])
-}]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

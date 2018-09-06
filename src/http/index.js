@@ -6,7 +6,7 @@ export function addEditLog (paramData) {
     uid: '2DA8DF88-E8F3-4BC5-ABF0-111843ABACF1', key: 'RyAkcFaz6KCKdW06EQKFHNEISQDDA', strSysMac: '30-5A-3A-E4-4F-14'
   }, {'param': paramData})
 
-  // const en = encode(qs.stringify(data))
+  // console.log(data)
   const en = encode(JSON.stringify(data))
   return new Promise((resolve, reject) => {
     fly.post('/Mobile/GetData/GetAjaxData', {data: en}).then((res) => {

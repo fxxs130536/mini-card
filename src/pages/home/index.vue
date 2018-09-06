@@ -167,11 +167,16 @@
       
          </div>
          <!-- open-type="contact" session-from="weapp" -->
-         <button class="send-msg text-center border"   @click="sendInfo">
+         <!-- <button class="send-msg text-center border"   @click="sendInfo">
 
            <i-icon type="brush" size="18" color="#2d8cf0"/>
            <p class="font-mini" >留言</p>
-         </button>
+         </button> -->
+          <div class="send-msg text-center border"   @click="scanQr">
+
+           <i-icon type="scan" size="18" color="#2d8cf0"/>
+           <p class="font-mini" >扫码</p>
+         </div>
       <i-divider content="我是有底线的！"></i-divider>
      
   </div>
@@ -216,17 +221,19 @@ export default {
     }
   },
   onShareAppMessage () {
+    var url = this.$route.path
     return {
       title: this.cardInfo.strName + '名片',
       imageUrl: this.cardInfo.strAvatarUrl,
-      path: '/pages/home/main?strOpenId_b=' + this.openId,
+      path: '/pages/transfer/main?shareOpenId=' + this.shareOpenId + '&target=' + url + '&type=tab',
       success: async res => {
+        // console.log(res)
         let Details = this.userInfo.strName + '分享了' + this.shareCardInfo.strName + '的名片'
         let paramData = {'Name': '分享名片', 'Type': '101', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
-        await api.post_aad_log(paramData)
+        await addEditLog(paramData)
       },
       fail: function (res) {
-
+        console.log(res)
       }
     }
   },
@@ -273,16 +280,18 @@ export default {
     async link () {
       var params = {'strOpenId_c': this.openId, 'strOpenId_b': this.shareOpenId, type: 2}
       var res = await api.post_like(params)
-      var Details = this.userInfo.strName + '点赞了' + this.shareCardInfo.strName + '的名片'
+      if (!this.cardInfo.isLike) {
+        var Details = this.userInfo.strName + '点赞了' + this.shareCardInfo.strName + '的名片'
 
-      var paramData = {'Name': '点赞名片', 'Type': '100', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+        var paramData = {'Name': '点赞名片', 'Type': '100', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+        await addEditLog(paramData)
+      }
 
-      await addEditLog(paramData)
       this.getCardInfo()
     },
     dial (str) {
       this.$wxapi.makePhoneCall({
-        phoneNumber: str
+        phoneNumber: '13553699106'
       }).then(async res => {
         let Details = this.userInfo.strName + '拨打了' + this.shareCardInfo.strName + '的电话'
 
@@ -313,6 +322,7 @@ export default {
 
               var Details = this.userInfo.strName + '复制了' + this.shareCardInfo.strName + '的公司'
               var paramData = {'Name': '复制公司', 'Type': '复制公司&a', 'Details': Details, 'Controller': 'home', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
               await addEditLog(paramData)
               // await api.test_Api()
               break
@@ -406,6 +416,15 @@ export default {
     },
     sendInfo () {
       this.$router.push({path: '/pages/chat/main', query: {id: 'caixia'}})
+    },
+    scanQr () {
+      this.$wxapi.scanCode({
+        scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417']
+      }).then(res => {
+        console.log(res)
+      }).catch(res => {
+
+      })
     }
 
   }

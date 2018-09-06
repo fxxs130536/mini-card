@@ -1,13 +1,13 @@
-global.webpackJsonp([10],{
+global.webpackJsonp([11],{
 
-/***/ 126:
+/***/ 127:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(128);
 
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_1__index__["a" /* default */]);
@@ -27,16 +27,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 127:
+/***/ 128:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(129);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_10c8a7ae_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_10c8a7ae_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(136);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(128)
+  __webpack_require__(129)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
@@ -81,29 +81,32 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 128:
+/***/ 129:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 129:
+/***/ 130:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(4);
 
 
 
+//
+//
+//
 //
 //
 //
@@ -208,12 +211,17 @@ if (false) {(function () {
     };
   },
   onShareAppMessage: function onShareAppMessage(e) {
-    console.log(e.target.dataset.id);
+    console.log(e);
+
+    var id = e.target.dataset.id;
+    var artTitle = e.target.dataset.strTitle;
+    var img = e.target.dataset.img;
+    var para = { id: id, title: '公司动态详情', type: 'share' };
+    var title = '转发' + artTitle + '文章';
     return {
       title: '转发文章',
-      desc: '这是我的名片请惠存',
-      //   imageUrl: this.cardInfo.strAvatarUrl,
-      path: '/pages/advisoryDetails/main?strOpenId_b=' + this.sharePara.ab,
+      imageUrl: img,
+      path: '/pages/transfer/main?shareOpenId=' + this.shareOpenId + '&target=/pages/advisoryDetails/main' + '&para=' + para,
       success: function success(res) {
         console.log(res);
       },
@@ -226,13 +234,11 @@ if (false) {(function () {
     this.getData();
   },
   onReachBottom: function onReachBottom(e) {
-    console.log(e);
-
     wx.showLoading({
       title: '玩命加载中'
     });
-    wx.hideLoading();
     this.getData();
+    wx.hideLoading();
   },
 
 
@@ -285,14 +291,13 @@ if (false) {(function () {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log(11);
                 _this = _this3;
 
                 _this3.par['$rowIndex']++;
-                _context2.next = 5;
+                _context2.next = 4;
                 return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].get_PropagandaColumn(_this3.par);
 
-              case 5:
+              case 4:
                 res = _context2.sent;
                 dgData = res.dgData;
 
@@ -304,7 +309,7 @@ if (false) {(function () {
                 wx.stopPullDownRefresh();
                 wx.hideLoading();
 
-              case 10:
+              case 9:
               case 'end':
                 return _context2.stop();
             }
@@ -351,7 +356,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 130:
+/***/ 136:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -367,7 +372,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
         _vm.sendShow = false
       }
     }
-  }, [_vm._l((_vm.news.newslist), function(items, index) {
+  }, [(_vm.news.newslist != '' || _vm.news.newslist != '[]') ? _c('div', _vm._l((_vm.news.newslist), function(items, index) {
     return _c('div', {
       key: items.newsid,
       staticClass: "find-wrapper p-a-2 find-list"
@@ -404,7 +409,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       staticClass: "font-color-main text-oh fr find-header-3 text-right shareBtn",
       attrs: {
         "open-type": "share",
-        "data-id": "111"
+        "data-id": items.id,
+        "data-strTitle": items.strTitle,
+        "data-img": items.strTitleUrl
       }
     }, [_vm._v("转发")])], 1), _vm._v(" "), _c('div', {
       staticClass: "find-body"
@@ -446,7 +453,9 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }, [_c('span', {
       staticClass: "find-time fl p-y-1"
     }, [_vm._v(_vm._s(items.dCreateTime))])])])])], 1)], 1)
-  }), _vm._v(" "), (_vm.sendShow) ? _c('div', {
+  })) : _c('div', {
+    staticClass: "text-center m-a-2"
+  }, [_vm._v("空空余也！")]), _vm._v(" "), (_vm.sendShow) ? _c('div', {
     staticClass: "send-comment clearfix p-x-2 p-b-1",
     attrs: {
       "eventid": '3'
@@ -484,7 +493,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "content": "已经没有更多了！",
       "mpcomid": '6'
     }
-  }) : _vm._e()], 2)
+  }) : _vm._e()], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -499,5 +508,5 @@ if (false) {
 
 /***/ })
 
-},[126]);
+},[127]);
 //# sourceMappingURL=main.js.map

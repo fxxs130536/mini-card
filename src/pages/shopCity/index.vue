@@ -5,7 +5,7 @@
         
             <transition name="fade">
                 <nav  class="top-bar p-x-2" v-if="topBarShow">
-                  <div class="top-bar-l fl text-oh  font-color-sub">加推科技商城</div>
+                  <div class="top-bar-l fl text-oh  font-color-sub">{{shareCardInfo.strCompany}}商城</div>
                   <div class="top-bar-r font-color-sub fr">
                     <i-icon class="p-a-1" type="publishgoods_fill" size="24"/>
                       <i-icon class="p-a-1" type="mine" size="24"/>
@@ -24,24 +24,24 @@
           </header>
           <div class="shopTitle p-a-1  bgf">
             <div class="shop-logo center-a  radius">
-              <img class="radius" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt="">
+              <img class="radius" :src="shareCardInfo.strAvatarUrl" alt="">
             </div>
             <div  class="shop-name">
-              <h4 class="font-title bold">印生活科技商城</h4>
+              <h4 class="font-title bold">{{shareCardInfo.strCompany}}商城</h4>
               <p><i-icon type="task_fill" color="#2d8cf0" size="20"/>&nbsp;认证企业</p>
             </div>
           </div>
           <!-- 商品列表 -->
           <div class="shop-list">
             <ul class="p-y-2 p-x-1 clearfix">
-              <li class="shop-items oh radius bgf fl m-b-2" @click="goDetails" v-for="(items,index) in 5" :key="index">
+              <li class="shop-items oh radius bgf fl m-b-2" @click="goDetails(items.Id,items.Name)" v-for="(items,index) in products" :key="items.id">
                 <div class="shop-top center-a">
-                  <img class="shop-img" src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt="">
+                  <img class="shop-img" :src="items.CoverImage" alt="">
                   <div class="shop-tip font-title center-a p-x-1">推荐产品</div>
                 </div>
                 <div class="p-a-1">
-                      <p  class="shop-desc text-oh-2 font-title">买了这产品一年买车两年买房三年赢取白富美从此走上人生巅峰！！！</p>
-                      <p class="shop-price  ">¥&nbsp;1000</p>
+                      <p  class="shop-desc text-oh-2 font-title">{{items.Name}}{{'('+items.ProductDetails+')'}}</p>
+                      <p class="shop-price  ">¥&nbsp;{{items.SalePrice}}</p>
                 </div>
             
               </li>
@@ -59,7 +59,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      topBarShow: false
+      topBarShow: false,
+      products: ''
     }
   },
   onPageScroll (event) {
@@ -69,6 +70,10 @@ export default {
     } else {
       this.topBarShow = false
     }
+  },
+  onPullDownRefresh: function () {
+    this.productList()
+    wx.stopPullDownRefresh()
   },
   components: {},
 
@@ -82,7 +87,9 @@ export default {
   },
 
   mounted () {
+    this.topBarShow = false
     this.addShopLog()
+    this.productList()
   },
 
   methods: {
@@ -93,13 +100,21 @@ export default {
 
       await addEditLog(paramData)
     },
-    async goDetails (paras) {
-      this.$router.push({path: '/pages/shopDetails/main'})
-      var Details = this.userInfo.strName + '查看了' + this.shareCardInfo.strName + '的公司商城的某某商品'
+    async goDetails (id, name) {
+      this.$router.push({path: '/pages/shopDetails/main', query: {id: id}})
+      var Details = this.userInfo.strName + '查看了' + this.shareCardInfo.strName + '公司商城的' + name
 
-      var paramData = {'Name': '查看了某个商城', 'Type': '106', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+      var paramData = {'Name': '查看了产品', 'Type': '106', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
 
       await addEditLog(paramData)
+    },
+    async productList () {
+      var data = {'@CompanyId': this.shareCardInfo.CompanyId}
+
+      var res = await api.get_Product_info(data)
+      this.products = res.dgData
+
+      // console.log(res)
     }
   }
 }

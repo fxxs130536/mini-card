@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "i-button": "../../dist/button/index",
+    "i-spin": "../../dist/spin/index"
+  }
+}

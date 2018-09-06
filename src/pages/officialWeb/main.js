@@ -4,7 +4,7 @@ const app = new Vue(App)
 app.$mount()
 export default {
   config: {
-    enablePullDownRefresh: false,
+    enablePullDownRefresh: true,
     navigationBarTitleText: '官网',
     'usingComponents': {
       'i-panel': '../../dist/panel/index',

@@ -157,7 +157,7 @@ let api = {
           } else {
             var url = getCurrentPageUrlWithArgs()
             // console.log(url)
-            wx.redirectTo({url: '/pages/login/main?scopeInfo=false&target=/' + url + ''})
+            wx.redirectTo({url: '/pages/transfer/main?scopeInfo=false&target=/' + url + ''})
           }
         }
       })
@@ -228,7 +228,12 @@ let api = {
   // 查看名片首页
   post_card_home: (data) => axios.getAjaxData(data, undefined, '82affbc4-f8bd-429b-9ea7-5c6e2067eda5'),
   // 添加操作日志
-  post_aad_log: (data) => axios.getAjaxData(data, undefined, '2DA8DF88-E8F3-4BC5-ABF0-111843ABACF1')
+  post_aad_log: (data) => axios.getAjaxData(data, undefined, '2DA8DF88-E8F3-4BC5-ABF0-111843ABACF1'),
+  // 查询产品信息
+
+  get_Product_info: (data) => axios.getAjaxData(data, 'Get_VCarProduct'),
+  // 查询公司信息
+  Get_VCarCompany: (data) => axios.getAjaxData(data, 'Get_VCarCompany')
 
 }
 

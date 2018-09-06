@@ -157,10 +157,10 @@
       <template wx:if="{{cardInfo.images != ''}}" data="{{...$root[$kk+'35'], $root}}" is="index$2242b63a"></template>
       <view wx:else class="_p data-v-40c71862 font-sub text-center p-y-1">照片空空如也</view>
     </view>
-    <button class="_button data-v-40c71862 send-msg text-center border" bindtap="handleProxy" data-eventid="{{'11'}}" data-comkey="{{$k}}">
-      <i-icon type="brush" size="18" color="#2d8cf0" class="_i-icon data-v-40c71862"></i-icon>
-      <view class="_p data-v-40c71862 font-mini">留言</view>
-    </button>
+    <view class="_div data-v-40c71862 send-msg text-center border" bindtap="handleProxy" data-eventid="{{'11'}}" data-comkey="{{$k}}">
+      <i-icon type="scan" size="18" color="#2d8cf0" class="_i-icon data-v-40c71862"></i-icon>
+      <view class="_p data-v-40c71862 font-mini">扫码</view>
+    </view>
     <i-divider content="我是有底线的！" class="_i-divider data-v-40c71862"></i-divider>
   </view>
 </template>
