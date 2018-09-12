@@ -233,7 +233,15 @@ let api = {
 
   get_Product_info: (data) => axios.getAjaxData(data, 'Get_VCarProduct'),
   // 查询公司信息
-  Get_VCarCompany: (data) => axios.getAjaxData(data, 'Get_VCarCompany')
+  Get_VCarCompany: (data) => axios.getAjaxData(data, 'Get_VCarCompany'),
+  // 绑定公司二维码
+  post_bindCompany: (data) => axios.getAjaxData(data, 'tbEditBindCompany', '4847D4B9-AEBB-4EEC-AE4F-3755DD3DD1F3'),
+  // 雷达信息
+  Get_OperationLogsTime: (data) => axios.getAjaxData(data, 'Get_OperationLogsTime'),
+  Get_OperationLogsBehavior: (data) => axios.getAjaxData(data, 'Get_OperationLogsBehavior'),
+  Get_OperationLogsPeople: (data) => axios.getAjaxData(data, 'Get_OperationLogsPeople'),
+  // 生成公司二维码
+  Get_CompanyCode: (data) => axios.getAjaxData(data, 'getBindCompanyCode', '6353C3BD-147E-464E-B7EE-A86D1B951541')
 
 }
 

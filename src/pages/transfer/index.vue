@@ -19,7 +19,7 @@
 <script>
 // import store from '@/store/store'
 import api from '@/utils/api'
-
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -29,7 +29,9 @@ export default {
     }
   },
   computed: {
-
+    ...mapGetters({
+      openId: 'openId'
+    })
   },
   mounted () {
     this.canIUse = wx.canIUse('button.open-type.getUserInfo')
@@ -67,6 +69,10 @@ export default {
       }
       if (query.shareOpenId) {
         this.$store.commit('shareOpenId', query.shareOpenId)
+      }
+      if (query.shareOpenId.toUpperCase() === this.openId.toUpperCase()) {
+        this.$router.push({ path: '/pages/admin/main', reLaunch: true })
+        return
       }
       switch (query.type) {
         case 'new':

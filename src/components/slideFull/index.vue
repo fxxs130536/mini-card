@@ -1,22 +1,22 @@
 <template>
   <div>
     <div class="img-list">
-        <img @click="sildeModelShowHandle(index)"  v-for="(items,index) in imgUrls" :key="index" class="modle-img m-y-1" :src="items" alt="">
+        <img @click="sildeModelShowHandle(items.imgUrl)"  v-for="(items,index) in imgUrls" :key="index" class="modle-img m-y-1" :src="items.imgUrl" alt="">
 
     </div>
 
-        <transition name="fade">
+        <!-- <transition name="fade">
             <div class="silde-model center-a" @touchmove.stop v-if="sildeModelShow" @click="sildeModelHideHandle">
                 <swiper :indicator-dots="indicatorDots"
                     :autoplay="autoplay" :interval="interval" :duration="duration" indicator-color="#fff" indicator-active-color="#2d8cf0" class="silde-model-swiper oh" :current="current">
                     <block v-for="(itmes,index) in imgUrls" :key="index" >
                         <swiper-item>
-                        <image  :src="itmes" class="silde-model-image" width="100%" height="100%"/>
+                          <image  :src="itmes.imgUrl" class="silde-model-image" width="100%" />
                         </swiper-item>
                     </block>
                 </swiper>
             </div>
-        </transition>
+        </transition> -->
   </div>
 </template>
 
@@ -32,19 +32,43 @@ export default {
   },
   data () {
     return {
-      current: 0
-
+      current: 0,
+      imgArray: []
     }
   },
+  mounted () {
+  },
   methods: {
+    imgList () {
+      this.imgArray = []
+      this.imgUrls.map(item => {
+        this.imgArray.push(item.imgUrl)
+      })
+    },
     sildeModelShowHandle (index) {
+      this.imgList()
+      var _this = this
       this.current = index
 
       this.sildeModelShow = true
+      this.$wxapi.previewImage({
+        urls: _this.imgArray,
+        current: index
+      }).then(res => {
+
+      }).catch(res => {
+        console.log(res)
+      })
     },
+    // sildeModelShowHandle (index) {
+    //   this.current = index
+
+    //   this.sildeModelShow = true
+    // },
     sildeModelHideHandle () {
       this.sildeModelShow = false
     }
+
   }
 }
 </script>

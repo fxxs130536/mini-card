@@ -79,7 +79,7 @@ axios.getAjaxData = (param, strMethod, uid) => new Promise((resolve, reject) => 
     param: param || paramData
   })
   const en = encode(JSON.stringify(data))
-  // console.log(en)
+  console.log(data)
   wx.request({
     url: domain + '/Mobile/GetData/GetAjaxData',
     method: 'POST',
@@ -87,6 +87,7 @@ axios.getAjaxData = (param, strMethod, uid) => new Promise((resolve, reject) => 
       data: en
     },
     success: res => {
+      console.log(res)
       try {
         if (res.data.success) {
           resolve(res.data.data)

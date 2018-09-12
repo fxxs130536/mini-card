@@ -1,0 +1,131 @@
+<import src="card-item$244a817d" />
+<import src="man-detail$6f58d027" />
+<template name="index$1535026a">
+  <view class="_div data-v-2ceac3b5 page app">
+    <i-tab-bar current="{{current}}" bindchange="handleProxy" fixed="{{true}}" color="#2d8cf0" data-eventid="{{'0'}}" data-comkey="{{$k}}" class="_i-tab-bar data-v-2ceac3b5">
+      <i-tab-bar-item key="radar" icon="homepage" current-icon="homepage_fill" title="雷达" class="_i-tab-bar-item data-v-2ceac3b5"></i-tab-bar-item>
+      <i-tab-bar-item key="person" icon="group" current-icon="group_fill" title="我" class="_i-tab-bar-item data-v-2ceac3b5"></i-tab-bar-item>
+    </i-tab-bar>
+    <view class="_div data-v-2ceac3b5 tabar-wrapper" wx:if="{{current == 'radar'}}">
+      <i-row class="_i-row data-v-2ceac3b5">
+        <i-tabs current="{{radar.current}}" bindchange="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}" class="_i-tabs data-v-2ceac3b5">
+          <i-tab key="tab1" title="时间" class="_i-tab data-v-2ceac3b5"></i-tab>
+          <i-tab key="tab2" title="行为" class="_i-tab data-v-2ceac3b5"></i-tab>
+          <i-tab key="tab3" title="人" class="_i-tab data-v-2ceac3b5"></i-tab>
+        </i-tabs>
+      </i-row>
+      <view wx:if="{{radar.current=='tab1'}}" class="_div data-v-2ceac3b5">
+        <i-row i-class="tab1-content" wx:key="index" key="{{index}}" wx:for="{{radar.radarList}}" wx:for-index="index" wx:for-item="item" class="_i-row data-v-2ceac3b5">
+          <i-col span="4" i-class="col-class" class="_i-col data-v-2ceac3b5">
+            <i-avatar i-class="radar-img" src="{{item.strAvatarUrl}}" size="default" shape="square" class="_i-avatar data-v-2ceac3b5"></i-avatar>
+          </i-col>
+          <i-col span="16" i-class="col-class" class="_i-col data-v-2ceac3b5">
+            <view class="_div data-v-2ceac3b5 radar-text">
+              <view class="_p data-v-2ceac3b5 radar-title">{{item.Details}}</view>
+            </view>
+          </i-col>
+          <i-col span="4" i-class="col-class" class="_i-col data-v-2ceac3b5">
+            <i-icon class="_i-icon data-v-2ceac3b5 radar-icon" type="enter" size="28" color="#80848f"></i-icon>
+          </i-col>
+        </i-row>
+      </view>
+      <view class="_div data-v-2ceac3b5 action-list" wx:if="{{radar.current == 'tab2'}}">
+        <i-cell-group i-class="action-top  p-y-2" class="_i-cell-group data-v-2ceac3b5">
+          <i-cell title="仅七天被查看的行为统计" i-class="top-cell" class="_i-cell data-v-2ceac3b5">
+            <i-icon class="_i-icon data-v-2ceac3b5 radar-icon" type="createtask" size="28" color="#2d8cf0" slot="footer"></i-icon>
+          </i-cell>
+        </i-cell-group>
+        <view class="_div data-v-2ceac3b5 center">
+          <template image="http://yj.kiy.cn/Content/Images/App/assets/icon/充值流量.png" data="{{...$root[$kk+'17'], $root}}" is="card-item$244a817d"></template>
+          <template image="http://yj.kiy.cn/Content/Images/App/assets/icon/字体样式.png" data="{{...$root[$kk+'18'], $root}}" is="card-item$244a817d"></template>
+          <template image="http://yj.kiy.cn/Content/Images/App/assets/icon/文件.png" data="{{...$root[$kk+'19'], $root}}" is="card-item$244a817d"></template>
+          <template image="http://yj.kiy.cn/Content/Images/App/assets/icon/统计.png" data="{{...$root[$kk+'20'], $root}}" is="card-item$244a817d"></template>
+        </view>
+        <view class="_div data-v-2ceac3b5 bottom">
+          <i-cell-group class="_i-cell-group data-v-2ceac3b5">
+            <i-cell i-class="bottom-list" title="{{radar.formData[4].TypeName}}" value="{{radar.formData[4].Number + '次'}}" class="_i-cell data-v-2ceac3b5">
+              <i-icon type="like_fill" slot="icon" color="#FFC125" class="_i-icon data-v-2ceac3b5"></i-icon>
+            </i-cell>
+            <i-cell i-class="bottom-list" title="{{radar.formData[5].TypeName}}" value="{{radar.formData[5].Number + '次'}}" class="_i-cell data-v-2ceac3b5">
+              <i-icon type="share_fill" slot="icon" color="#EE30A7" class="_i-icon data-v-2ceac3b5"></i-icon>
+            </i-cell>
+            <i-cell i-class="bottom-list" title="{{radar.formData[6].TypeName}}" value="{{radar.formData[6].Number + '次'}}" class="_i-cell data-v-2ceac3b5">
+              <i-icon type="mobilephone" slot="icon" color="#B23AEE" class="_i-icon data-v-2ceac3b5"></i-icon>
+            </i-cell>
+          </i-cell-group>
+        </view>
+      </view>
+      <view class="_div data-v-2ceac3b5 action-detail" wx:if="{{radar.current== 'tab3' }}">
+        <i-cell-group i-class="action-top p-y-2" class="_i-cell-group data-v-2ceac3b5">
+          <i-cell title="仅七天被查看的行为统计" i-class="top-cell " class="_i-cell data-v-2ceac3b5">
+            <i-icon class="_i-icon data-v-2ceac3b5 radar-icon" type="createtask" size="28" color="#2d8cf0" slot="footer"></i-icon>
+          </i-cell>
+        </i-cell-group>
+        <view class="_div data-v-2ceac3b5 action-detail-center">
+          <view wx:key="index" key="{{index}}" wx:for="{{radar.formGroup}}" wx:for-index="index" wx:for-item="item" class="_div data-v-2ceac3b5">
+            <template data="{{...$root[$kk+'31-'+index], $root}}" is="man-detail$6f58d027"></template>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="_div data-v-2ceac3b5 tabar-wrapper" wx:if="{{current == 'person'}}">
+      <view class="_div data-v-2ceac3b5 me-header card-bg" style=" {{('background-image:' + ('url(' + userInfo.strBackground + ')') + ';')}}">
+        <view class="_div data-v-2ceac3b5 me-header-cont  p-y-2">
+          <view class="_div data-v-2ceac3b5">
+            <i-row i-class="p-x-2" class="_i-row data-v-2ceac3b5">
+              <i-col i-class span="{{4}}" class="_i-col data-v-2ceac3b5">
+                <i-avatar size="large" src="{{userInfo.strAvatarUrl}}" class="_i-avatar data-v-2ceac3b5"></i-avatar>
+              </i-col>
+              <i-col i-class="p-x-1" span="{{18}}" class="_i-col data-v-2ceac3b5">
+                <view class="_p data-v-2ceac3b5 me-title">{{userInfo.strName}}</view>
+                <view class="_p data-v-2ceac3b5 me-sub">{{userInfo.strPosition}}</view>
+              </i-col>
+              <i-col i-class span="{{2}}" class="_i-col data-v-2ceac3b5">
+                <i-icon class="_i-icon data-v-2ceac3b5 p-a-1" type="editor" size="22" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}"></i-icon>
+              </i-col>
+            </i-row>
+            <i-divider lineColor="#dddee1" class="_i-divider data-v-2ceac3b5"></i-divider>
+            <view class="_div data-v-2ceac3b5 me-b p-x-2">
+              <view class="_p data-v-2ceac3b5 me-title">{{userInfo.strCompany}}</view>
+              <view class="_p data-v-2ceac3b5 me-sub">电话：{{userInfo.strMobile}}</view>
+              <view class="_p data-v-2ceac3b5 me-sub">邮箱：{{userInfo.strEmail}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="_div data-v-2ceac3b5 me-header-b bgf m-b-2">
+        <i-row i-class="p-y-1 ranking" class="_i-row data-v-2ceac3b5">
+          <i-col i-class="text-center font-color" span="8" class="_i-col data-v-2ceac3b5">
+            <view class="_p data-v-2ceac3b5 text-oh">{{userInfo.intHits}}</view>
+            <view class="_p data-v-2ceac3b5 center-a">
+              <i-icon type="flag_fill" color="#f5222d" size="22" class="_i-icon data-v-2ceac3b5"></i-icon>人气</view>
+          </i-col>
+          <i-col i-class="text-center font-color" span="8" class="_i-col data-v-2ceac3b5">
+            <view class="_p data-v-2ceac3b5 text-oh">{{userInfo.intLikes}}</view>
+            <view class="_p data-v-2ceac3b5 center-a ">
+              <i-icon type="praise_fill" color="#19be6b" size="22" class="_i-icon data-v-2ceac3b5"></i-icon>点赞</view>
+          </i-col>
+          <i-col i-class="text-center font-color" span="8" class="_i-col data-v-2ceac3b5">
+            <view class="_p data-v-2ceac3b5 text-oh">{{userInfo.intCollects}}</view>
+            <view class="_p data-v-2ceac3b5 center-a">
+              <i-icon type="collection_fill" color="#ff9900" size="22" class="_i-icon data-v-2ceac3b5"></i-icon>收藏</view>
+          </i-col>
+        </i-row>
+        <i-divider lineColor="#dddee1" height="4" class="_i-divider data-v-2ceac3b5"></i-divider>
+        <i-row i-class="p-x-2 " class="_i-row data-v-2ceac3b5">
+          <i-col i-class="font-color-sub p-y-2" span="3" class="_i-col data-v-2ceac3b5">简介</i-col>
+          <i-col i-class="font-color p-y-2" span="21" class="_i-col data-v-2ceac3b5">{{userInfo.strIntro}}</i-col>
+        </i-row>
+      </view>
+      <view class="_div data-v-2ceac3b5 submit-btn">
+        <i-button bindtap="handleProxy" type="primary" open-type="share" data-eventid="{{'3'}}" data-comkey="{{$k}}" class="_i-button data-v-2ceac3b5">递名片</i-button>
+      </view>
+      <view class="_div data-v-2ceac3b5 submit-btn">
+        <i-button bindtap="handleProxy" type="primary" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_i-button data-v-2ceac3b5">生成二维码</i-button>
+      </view>
+      <view class="_div data-v-2ceac3b5 submit-btn">
+        <i-button bindtap="handleProxy" type="primary" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_i-button data-v-2ceac3b5">返回名片列表</i-button>
+      </view>
+    </view>
+  </view>
+</template>

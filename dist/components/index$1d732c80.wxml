@@ -104,15 +104,17 @@
     <view class="_div data-v-40c71862 card-wrapper p-x-3 m-b-1 ">
       <view class="_div data-v-40c71862 title clearfix">
         <view class="_h4 data-v-40c71862 font-title fl text-oh bold">我推荐的商品</view>
-        <label class="_span data-v-40c71862 font-mini fr text-right">全部商品
+        <label bindtap="handleProxy" class="_span data-v-40c71862 font-mini fr text-right" data-eventid="{{'10'}}" data-comkey="{{$k}}">全部商品
           <i-icon type="enter" size="12" class="_i-icon data-v-40c71862"></i-icon>
         </label>
       </view>
       <view class="_div data-v-40c71862 shop-list clearfix">
-        <view class="_div data-v-40c71862 shop-items fl m-b-2 p-b-1" wx:key="index" key="{{index}}" wx:for="{{2}}" wx:for-index="index" wx:for-item="items">
-          <image src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt class="_img data-v-40c71862"></image>
-          <view class="_p data-v-40c71862 font"> 加推人只能名片10人精英版（123465678） </view>
-          <label class="_span data-v-40c71862 font-mini"> ¥1000 </label>
+        <view bindtap="handleProxy" wx:key="items.id" key="{{items.id}}" data-eventid="{{'11-'+index}}" data-comkey="{{$k}}" wx:for="{{products}}" wx:for-index="index" wx:for-item="items" class="_div data-v-40c71862">
+          <view wx:if="{{index >= 0 && index < 2}}" class="_div data-v-40c71862 shop-items fl m-b-2 p-b-1">
+            <image src="{{items.CoverImage}}" alt class="_img data-v-40c71862"></image>
+            <view class="_p data-v-40c71862 font"> {{items.Name}}{{'('+items.ProductDetails+')'}} </view>
+            <label class="_span data-v-40c71862 font-mini"> ¥ {{items.SalePrice}} </label>
+          </view>
         </view>
       </view>
     </view>
@@ -121,34 +123,6 @@
         <view class="_h4 data-v-40c71862 font-title fl text-oh bold">我的个人简介</view>
       </view>
       <view class="_div data-v-40c71862 font font-color-title"> {{ cardInfo.strIntro}} </view>
-      <view class="_div data-v-40c71862 audio clearfix border p-x-2 p-y-1 center-y m-y-2">
-        <view class="_div data-v-40c71862 audio-icon fl center-a" bindtap="handleProxy" data-eventid="{{'10'}}" data-comkey="{{$k}}">
-          <view class="_i data-v-40c71862 icon_audio_default {{[isPlay ? 'icon_audio_playing' : '']}}"></view>
-        </view>
-        <view class="_div data-v-40c71862 audio-cont fl">
-          <view class="_p data-v-40c71862 font">我的语音介绍</view>
-          <progress class="_progress data-v-40c71862 m-y-1" percent="{{percentAudio}}" stroke-width="2" activeColor="#09BB07" />
-          <view class="_p data-v-40c71862 clearfix">
-            <label class="_span data-v-40c71862 fl font-mini">{{playTime.currentTime}}</label>
-            <label class="_span data-v-40c71862 fr font-mini">{{playTime.duration}}</label>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="_div data-v-40c71862 card-wrapper p-x-3 m-b-1 p-b-2">
-      <view class="_div data-v-40c71862 title clearfix">
-        <view class="_h4 data-v-40c71862 font-title fl text-oh bold">我的印象标签</view>
-      </view>
-      <view class="_div data-v-40c71862 clearfix">
-        <view class="_div data-v-40c71862 tag p-x-1">
-          <label class="_span data-v-40c71862 font"> 获客神器</label>
-          <label class="_span data-v-40c71862 m-l-1 font-mini font-color-main" style="color:#fff">1030</label>
-        </view>
-        <view class="_div data-v-40c71862 tag p-x-1">
-          <label class="_span data-v-40c71862 font"> 获客神器</label>
-          <label class="_span data-v-40c71862 m-l-1 font-mini font-color-main" style="color:#fff">1030</label>
-        </view>
-      </view>
     </view>
     <view class="_div data-v-40c71862 card-wrapper m-b-1 p-b-2">
       <view class="_div data-v-40c71862 title clearfix  p-x-3">
@@ -157,10 +131,14 @@
       <template wx:if="{{cardInfo.images != ''}}" data="{{...$root[$kk+'35'], $root}}" is="index$2242b63a"></template>
       <view wx:else class="_p data-v-40c71862 font-sub text-center p-y-1">照片空空如也</view>
     </view>
-    <view class="_div data-v-40c71862 send-msg text-center border" bindtap="handleProxy" data-eventid="{{'11'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-40c71862 send-msg text-center border" bindtap="handleProxy" data-eventid="{{'12'}}" data-comkey="{{$k}}">
       <i-icon type="scan" size="18" color="#2d8cf0" class="_i-icon data-v-40c71862"></i-icon>
       <view class="_p data-v-40c71862 font-mini">扫码</view>
     </view>
     <i-divider content="我是有底线的！" class="_i-divider data-v-40c71862"></i-divider>
+    <i-modal title="提示" visible="{{visible1}}" bindok="handleProxy" bindcancel="handleProxy" data-eventid="{{'13'}}" data-comkey="{{$k}}" class="_i-modal data-v-40c71862">
+      <view class="_view data-v-40c71862">是否扫描加入这家公司?</view>
+    </i-modal>
+    <i-message id="message" class="_i-message data-v-40c71862"></i-message>
   </view>
 </template>

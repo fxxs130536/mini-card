@@ -2,7 +2,7 @@
   "name": "mini-card",
   "version": "1.0.0",
   "description": "名片展示小程序",
-  "author": "tansiqing <17612043993@163.com>",
+  "author": "tansiqing <17612043993@163.com> and Yufly <lllidan120@163.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

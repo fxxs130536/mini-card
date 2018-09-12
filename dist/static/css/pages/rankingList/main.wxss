@@ -1,0 +1,48 @@
+@import "/static/css/vendor.wxss";
+
+.app.data-v-bb64304c {
+  padding-top: 324rpx;
+}
+.rankFixd.data-v-bb64304c {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+.ranking-header.data-v-bb64304c {
+  background: #2d8cf0;
+  background: linear-gradient(to right, #1488cc, #2d8cf0);
+  color: #fff;
+  width: 100%;
+  height: 240rpx;
+}
+.ranking-header .ranking-text.data-v-bb64304c {
+  font-size: 40rpx;
+  font-weight: bold;
+  width: calc(100% - 200rpx);
+}
+.ranking-header .ranking-img.data-v-bb64304c {
+  width: 200rpx;
+  height: 200rpx;
+}
+.tab-l.data-v-bb64304c {
+  width: 70rpx;
+}
+.tab-l image.data-v-bb64304c {
+  width: 40rpx;
+  height: 40rpx;
+}
+.tab-avatar.data-v-bb64304c {
+  width: 100rpx;
+}
+.tab-r.data-v-bb64304c {
+  width: calc(100% - 170rpx);
+}
+.tab-desc-name.data-v-bb64304c,
+.tab-desc-post.data-v-bb64304c {
+  width: 50%;
+}
+.tab-desc-t.data-v-bb64304c {
+  margin-bottom: 8rpx;
+}

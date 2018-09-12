@@ -1,0 +1,11 @@
+<template name="card-item$244a817d">
+  <view class="_div data-v-a75bca0e card" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+    <view class="_div data-v-a75bca0e card-left">
+      <text class="_text data-v-a75bca0e card-left-title">{{title}}</text>
+      <text class="_text data-v-a75bca0e card-left-text">{{text}}</text>
+    </view>
+    <view class="_div data-v-a75bca0e card-right">
+      <image src="{{image}}" class="_image data-v-a75bca0e card-right-image"></image>
+    </view>
+  </view>
+</template>

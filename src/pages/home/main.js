@@ -13,8 +13,9 @@ export default {
       'i-button': '../../dist/button/index',
       'i-divider': '../../dist/divider/index',
       'i-load-more': '../../dist/load-more/index',
-      'i-action-sheet': '../../dist/action-sheet/index'
-
+      'i-action-sheet': '../../dist/action-sheet/index',
+      'i-modal': '../../dist/modal/index',
+      'i-message': '../../dist/message/index'
     }
   }
 }

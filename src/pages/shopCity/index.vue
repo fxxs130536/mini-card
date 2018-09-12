@@ -37,7 +37,7 @@
               <li class="shop-items oh radius bgf fl m-b-2" @click="goDetails(items.Id,items.Name)" v-for="(items,index) in products" :key="items.id">
                 <div class="shop-top center-a">
                   <img class="shop-img" :src="items.CoverImage" alt="">
-                  <div class="shop-tip font-title center-a p-x-1">推荐产品</div>
+                  <div class="shop-tip font-title center-a p-x-1" v-if="index >= 0 && index < 2">推荐产品</div>
                 </div>
                 <div class="p-a-1">
                       <p  class="shop-desc text-oh-2 font-title">{{items.Name}}{{'('+items.ProductDetails+')'}}</p>
@@ -114,7 +114,7 @@ export default {
       var res = await api.get_Product_info(data)
       this.products = res.dgData
 
-      // console.log(res)
+      console.log(res)
     }
   }
 }

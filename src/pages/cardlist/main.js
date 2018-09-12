@@ -10,6 +10,7 @@ export default {
       'i-card': '../../dist/card/index',
       'i-icon': '../../dist/icon/index',
       'i-spin': '../../dist/spin/index'
+
     }
   }
 }

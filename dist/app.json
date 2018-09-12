@@ -1,14 +1,18 @@
 {
   "pages": [
     "pages/cardlist/main",
+    "pages/admin/main",
     "pages/advisoryDetails/main",
     "pages/chat/main",
+    "pages/editCard/main",
     "pages/find/main",
     "pages/home/main",
     "pages/joinUs/main",
     "pages/login/main",
     "pages/madePoster/main",
     "pages/officialWeb/main",
+    "pages/qrCode/main",
+    "pages/rankingList/main",
     "pages/shopCity/main",
     "pages/shopDetails/main",
     "pages/transfer/main"

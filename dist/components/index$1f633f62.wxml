@@ -3,8 +3,8 @@
     <view class="_ul data-v-1476595e">
       <view class="_li data-v-1476595e card-items p-b-1 " wx:key="index" key="{{index}}" wx:for="{{cardList}}" wx:for-index="index" wx:for-item="items">
         <view class="_div data-v-1476595e font-title font m-x-2   p-y-1">
-          <label class="_span data-v-1476595e">{{items.dCreateDate}}</label>
-          <label class="_span data-v-1476595e">来自风潇潇兮的转发</label>
+          <label class="_span data-v-1476595e"></label>
+          <label class="_span data-v-1476595e"></label>
         </view>
         <view class="_div data-v-1476595e card-cont" bindtap="handleProxy" data-eventid="{{'1-'+index}}" data-comkey="{{$k}}">
           <i-card title="{{items.strName}}" extra="{{items.strCompany}}" thumb="{{items.strAvatarUrl}}" class="_i-card data-v-1476595e">
@@ -13,7 +13,7 @@
                 <i-icon class="_i-icon data-v-1476595e fr" type="collection_fill" size="20" color="#ff9900"></i-icon>
               </view>
               <view class="_p data-v-1476595e font">{{items.strMobile}}</view>
-              <view class="_p data-v-1476595e font">{{items.strMobile}}</view>
+              <view class="_p data-v-1476595e font">{{items.strEmail}}</view>
             </view>
             <view slot="footer" class="_view data-v-1476595e clearfix">
               <view class="_div data-v-1476595e">
@@ -33,5 +33,6 @@
         </view>
       </view>
     </view>
+    <i-spin size="large" fix wx:if="{{spinShow}}" class="_i-spin data-v-1476595e">加载中...</i-spin>
   </view>
 </template>

@@ -34,7 +34,7 @@
           <view class="_li data-v-311e711e shop-items oh radius bgf fl m-b-2" bindtap="handleProxy" wx:key="items.id" key="{{items.id}}" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{products}}" wx:for-index="index" wx:for-item="items">
             <view class="_div data-v-311e711e shop-top center-a">
               <image class="_img data-v-311e711e shop-img" src="{{items.CoverImage}}" alt></image>
-              <view class="_div data-v-311e711e shop-tip font-title center-a p-x-1">推荐产品</view>
+              <view class="_div data-v-311e711e shop-tip font-title center-a p-x-1" wx:if="{{index >= 0 && index < 2}}">推荐产品</view>
             </view>
             <view class="_div data-v-311e711e p-a-1">
               <view class="_p data-v-311e711e shop-desc text-oh-2 font-title">{{items.Name}}{{'('+items.ProductDetails+')'}}</view>

@@ -105,17 +105,20 @@
           <div class="card-wrapper p-x-3 m-b-1 ">
               <div class="title clearfix">
                   <h4 class="font-title fl text-oh bold">我推荐的商品</h4>
-                  <span class="font-mini fr text-right" >全部商品<i-icon type="enter" size="12"/></span>
+                  <span @click="goShopCity" class="font-mini fr text-right" >全部商品<i-icon type="enter" size="12"/></span>
               </div>
-              <div class="shop-list clearfix">
-                  <div class="shop-items fl m-b-2 p-b-1" v-for="(items,index) in 2" :key="index">
-                      <img src="https://i.loli.net/2017/08/21/599a521472424.jpg" alt="">
-                      <p class="font">
-                          加推人只能名片10人精英版（123465678）
-                      </p>
-                      <span class="font-mini">
-                          ¥1000
-                      </span>
+              <div class="shop-list clearfix" >
+                  <div   @click="goDetails(items.Id,items.Name)" v-for="(items,index) in products" :key="items.id">
+                    <div v-if="index >= 0 && index < 2" class="shop-items fl m-b-2 p-b-1">
+                         <img :src="items.CoverImage" alt="">
+                          <p class="font">
+                              {{items.Name}}{{'('+items.ProductDetails+')'}}
+                          </p>
+                          <span class="font-mini">
+                              ¥&nbsp;{{items.SalePrice}}
+                          </span>
+                    </div>
+                     
                   </div>
               </div>
           </div>
@@ -128,8 +131,8 @@
               <div class="font font-color-title">
                  {{ cardInfo.strIntro}}
               </div>
-              
-              <div class="audio clearfix border p-x-2 p-y-1 center-y m-y-2">
+              <!-- 语音介绍 -->
+              <!-- <div class="audio clearfix border p-x-2 p-y-1 center-y m-y-2">
                   <div class="audio-icon fl center-a" @click="playAudio">
                       <i class="icon_audio_default" :class="{icon_audio_playing:isPlay}"></i>
                   </div>
@@ -139,10 +142,10 @@
                       <progress class="m-y-1" :percent="percentAudio" stroke-width="2" activeColor="#09BB07"></progress>
                       <p class="clearfix"><span class="fl font-mini">{{playTime.currentTime}}</span> <span class="fr font-mini">{{playTime.duration}}</span></p>
                   </div>
-              </div>
+              </div> -->
           </div>
          <!-- 印象标签 -->
-         <div class="card-wrapper p-x-3 m-b-1 p-b-2">
+         <!-- <div class="card-wrapper p-x-3 m-b-1 p-b-2">
              <div class="title clearfix">
                   <h4 class="font-title fl text-oh bold">我的印象标签</h4>                  
               </div>
@@ -154,7 +157,7 @@
                         <span class="font"> 获客神器</span><span class="m-l-1 font-mini font-color-main" style="color:#fff">1030</span>
                         </div>
                   </div>
-        </div>
+        </div> -->
         <!-- 我的照片 -->
          <div class="card-wrapper m-b-1 p-b-2">
               <div class="title clearfix  p-x-3">
@@ -172,13 +175,16 @@
            <i-icon type="brush" size="18" color="#2d8cf0"/>
            <p class="font-mini" >留言</p>
          </button> -->
-          <div class="send-msg text-center border"   @click="scanQr">
+          <div class="send-msg text-center border"   @click="openQr">
 
            <i-icon type="scan" size="18" color="#2d8cf0"/>
            <p class="font-mini" >扫码</p>
          </div>
       <i-divider content="我是有底线的！"></i-divider>
-     
+      <i-modal title="提示" :visible="visible1" @ok="handleClose1(true)" @cancel="handleClose1(false)">
+          <view>是否扫描加入这家公司?</view>
+      </i-modal>
+      <i-message id="message" />
   </div>
 </template>
 
@@ -187,6 +193,8 @@ import api from '@/utils/api'
 import {addEditLog} from '@/http'
 import { mapGetters } from 'vuex'
 import slideFull from '@/components/slideFull'
+import decode from '@/utils/decode'
+import { $Message } from '@/utils/base'
 
 export default {
   data () {
@@ -216,7 +224,9 @@ export default {
         }
       ],
       cardInfo: {},
-      showInfo: false
+      showInfo: false,
+      visible1: false,
+      products: ''
 
     }
   },
@@ -255,6 +265,7 @@ export default {
     this.addCardList()
     this.getCardInfo()
     this.initAudio()
+    this.productList()
   },
 
   methods: {
@@ -417,14 +428,67 @@ export default {
     sendInfo () {
       this.$router.push({path: '/pages/chat/main', query: {id: 'caixia'}})
     },
+    openQr () {
+      this.visible1 = true
+    },
+    handleClose1 (bool) {
+      this.visible1 = false
+      if (bool) {
+        this.scanQr()
+      }
+    },
     scanQr () {
+      var _this = this
       this.$wxapi.scanCode({
         scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417']
       }).then(res => {
-        console.log(res)
+        _this.bindCompany(res.result)
       }).catch(res => {
 
       })
+    },
+    async bindCompany (res) {
+      // res = 'eyJkYXRhIjoiZXlKd1lYSmhiU0k2SW50Y0lrTnZiWEJoYm5sSlpGd2lPbHdpTWx3aUxGd2ljM1J5VFdWMGFHOWtYQ0k2WENKMFlrVmthWFJDYVc1a1EyOXRjR0Z1ZVZ3aUxGd2ljM1J5VDNCbGJrbGtYQ0k2WENKN01IMWNJbjBpTENKMWFXUWlPaUkwT0RRM1JEUkNPUzFCUlVKQ0xUUkZSVU10UVVVMFJpMHpOelUxUkVRelJFUXhSak1pZlE9PSIsIlVybCI6Imh0dHBzOi8veWoua2l5LmNuL0dldERhdGEvR2V0QWpheERhdGEifQ=='
+      var data = JSON.parse(decode(res))
+      var deCodeData = decode(data.data)
+      var deCodeRes = JSON.parse(deCodeData)
+      var param = JSON.parse(deCodeRes.param)
+
+      var par = {
+        strOpenId: this.openId,
+        CompanyId: param.CompanyId
+      }
+      try {
+        await api.post_bindCompany(par)
+        $Message({
+          content: '成功加入公司',
+          type: 'success'
+        })
+      } catch (error) {
+        $Message({
+          content: '加入失败',
+          type: 'error'
+        })
+      }
+    },
+    async productList () {
+      var data = {'@CompanyId': this.shareCardInfo.CompanyId}
+
+      var res = await api.get_Product_info(data)
+      this.products = res.dgData
+
+      // console.log(this.products)
+    },
+    goShopCity () {
+      this.$router.push({path: '/pages/shopCity/main', isTab: true})
+    },
+    async goDetails (id, name) {
+      this.$router.push({path: '/pages/shopDetails/main', query: {id: id}})
+      var Details = this.userInfo.strName + '查看了' + this.shareCardInfo.strName + '公司商城的' + name
+
+      var paramData = {'Name': '查看了产品', 'Type': '106', 'Details': Details, 'Controller': 'find', 'Action': 'index', 'UserId': this.openId, 'OperatedUserId': this.shareOpenId}
+
+      await addEditLog(paramData)
     }
 
   }

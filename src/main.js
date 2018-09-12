@@ -23,8 +23,8 @@ export default {
   // 这个字段走 app.json
   config: {
     pages: [
+      // '^pages/admin/main'
       '^pages/cardlist/main'
-      // '^pages/chat/main'
       // Will be filled in webpack
     ],
     window: {

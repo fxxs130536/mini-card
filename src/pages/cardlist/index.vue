@@ -4,13 +4,13 @@
       <ul>
           
           <li class="card-items p-b-1 " v-for="(items,index) in cardList" :key="index">
-              <div class="font-title font m-x-2   p-y-1"><span>{{items.dCreateDate}}</span><span>来自风潇潇兮的转发</span></div>
+              <div class="font-title font m-x-2   p-y-1"><span></span><span></span></div>
                 <div class="card-cont"  @click="linkCard(items.strOpenId)">
                     <i-card  :title="items.strName" :extra="items.strCompany" :thumb="items.strAvatarUrl">
                     <view slot="content">
                         <p class="m-y-2 font-color-title font">{{items.strPosition}}<i-icon class="fr" type="collection_fill" size="20" color="#ff9900"/></p>
                         <p class="font">{{items.strMobile}}</p>
-                        <p class="font">{{items.strMobile}}</p>
+                        <p class="font">{{items.strEmail}}</p>
                     </view>
                     <view slot="footer" class="clearfix">
                         <div><span class="font-color-main card-footer fl">NO.{{index + 1}}</span>
@@ -31,7 +31,7 @@
       
 
 
-    <!-- <i-spin size="large" fix></i-spin> -->
+    <i-spin size="large" fix v-if="spinShow">加载中...</i-spin>
   </div>
 </template>
 
@@ -44,7 +44,8 @@ export default {
     return {
       show: false,
       link: true,
-      cardList: ''
+      cardList: '',
+      spinShow: true
     }
   },
 
@@ -55,39 +56,50 @@ export default {
       openId: 'openId'
     })
   },
+
   created () {
-    this.lookCard()
   },
   mounted () {
-
+    this.lookCard()
   },
 
   methods: {
     async lookCard () {
-      wx.showLoading({ title: '正在加载' })
+      this.spinShow = true
+      // wx.showLoading({ title: '正在加载' })
       var wxCode = await api.wxLogin()
 
       var openId = await api.wxOpenId(wxCode.code)
       // this.$store.commit('inOpenId', openId)
-      console.log(openId.openid)
       let data = { '@strOpenId_c': openId.openid, '@type': 4 }
-      console.log(api.post_look_card_list(data))
       var res = await api.post_look_card_list(data)
+
+      // if (res.data.length === 0) {
+      //   this.linkCard(openId.openid)
+      // } else {
+      //   this.cardList = res.data
+      // }
       console.log(res.data)
-      wx.hideLoading()
       this.cardList = res.data
+      this.getUser()
+    },
+    async getUser () {
+      var wxCode = await api.wxLogin()
+
+      var openId = await api.wxOpenId(wxCode.code)
+      var params = {'strOpenId_c': openId.openid, 'strOpenId_b': openId.openid}
+      var resdata = await api.post_card_home(params)
+      this.cardList.unshift(resdata)
+      // wx.hideLoading()
+      this.spinShow = false
     },
     linkCard (shareId) {
       this.$store.commit('shareOpenId', shareId)
+      if (shareId.toUpperCase() === this.openId.toUpperCase()) {
+        this.$router.push({ path: '/pages/admin/main', reLaunch: true })
+        return
+      }
       this.$router.push({ path: '/pages/home/main', isTab: true })
-      // this.$router.open({
-      //   name: '名片',
-      //   url: '/pages/home/main',
-      //   type: 'TAB',
-      //   params: {
-      //     shareId: shareId
-      //   }
-      // })
     }
   }
 }

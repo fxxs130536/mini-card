@@ -1,0 +1,7 @@
+<template name="index$7cac7d0f">
+  <view class="_div data-v-d20d22c4 page app">
+    <view class="_div data-v-d20d22c4 center-a m-t-3">
+      <image src="{{qrImg}}" alt style="width:306px;height:306px;" class="_img data-v-d20d22c4"></image>
+    </view>
+  </view>
+</template>
