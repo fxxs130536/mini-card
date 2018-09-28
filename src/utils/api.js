@@ -176,7 +176,8 @@ let api = {
   // 删除图片 , 需要穿'rowState' : 'D' 和 strId ， intType : 1 头像 2用户展示图片
   del_Image: (data) => axios.postApiData({
     data,
-    url: '/Upload/UpLoadImgs'
+    url: '/Upload/UpLoadImgs',
+    type: 'application/x-www-form-urlencoded'
   }),
   // 获取微信的OpenId，js_code必传
   wxOpenId: (data) => axios.postApiData({

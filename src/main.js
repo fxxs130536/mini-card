@@ -24,7 +24,7 @@ export default {
   config: {
     pages: [
       // '^pages/admin/main'
-      '^pages/cardlist/main'
+      '^pages/home/main'
       // Will be filled in webpack
     ],
     window: {

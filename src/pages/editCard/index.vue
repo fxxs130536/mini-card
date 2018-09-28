@@ -68,6 +68,7 @@
   export default {
     data () {
       return {
+        deleFiles: '',
         files: [],
         max: 8,
         fontNum: 0,
@@ -244,17 +245,22 @@
         })
       },
       dele (data) {
-        console.log(data.target)
+        // console.log(data.target)
         this.files.splice(data.i, 1)
-  
         try {
           this.deleArray.push(data.target.id)
+          // this.deleFiles = data.target.strFileName
+          // this.uploaderFiles(undefined, data.target.id, true)
         } catch (error) {
+          console.log(error)
         }
       },
       async delImage (par) {
+        // console.log(par)
+  
         var res = await api.del_Image(par)
-        console.log(res)
+        // console.log('删除图片')
+        // console.log(res)
       },
       uploaderFiles (tempFilePaths, strId, del) {
         const _this = this
@@ -267,7 +273,7 @@
         }
         if (del) {
           par = Object.assign(par, { rowState: 'D' })
-          console.log(par)
+
           this.delImage(par)
           return
         }

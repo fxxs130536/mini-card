@@ -152,7 +152,7 @@
             <i-button @click="handleQrcode" type="primary">生成二维码</i-button>
         </div>
          <div class="submit-btn">
-            <i-button @click="goCardList" type="primary">返回名片列表</i-button>
+            <i-button @click="goCardList" type="primary">查看名片信息</i-button>
         </div>
     </div>
   </div>
@@ -192,6 +192,12 @@ export default {
         console.log(res)
       }
     }
+  },
+  onPullDownRefresh: function () {
+    this.Get_OperationLogsTime()
+    this.Get_OperationLogsBehavior()
+    this.Get_OperationLogsPeople()
+    wx.stopPullDownRefresh()
   },
   components: {
     Card,
@@ -270,7 +276,7 @@ export default {
       this.$router.push({ path: '/pages/qrCode/main' })
     },
     goCardList () {
-      this.$router.push({path: '/pages/cardlist/main', reLaunch: true})
+      this.$router.push({path: '/pages/home/main', reLaunch: true})
     }
   }
 }

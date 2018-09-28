@@ -99,13 +99,13 @@ if (false) {(function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_typeof__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_regenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_regenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_asyncToGenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_extends__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_api__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store_store__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_uploader__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__utils_validate__ = __webpack_require__(165);
@@ -179,6 +179,7 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
+      deleFiles: '',
       files: [],
       max: 8,
       fontNum: 0,
@@ -412,12 +413,15 @@ if (false) {(function () {
       });
     },
     dele: function dele(data) {
-      console.log(data.target);
+      // console.log(data.target)
       this.files.splice(data.i, 1);
-
       try {
         this.deleArray.push(data.target.id);
-      } catch (error) {}
+        // this.deleFiles = data.target.strFileName
+        // this.uploaderFiles(undefined, data.target.id, true)
+      } catch (error) {
+        console.log(error);
+      }
     },
     delImage: function delImage(par) {
       var _this5 = this;
@@ -434,9 +438,7 @@ if (false) {(function () {
               case 2:
                 res = _context3.sent;
 
-                console.log(res);
-
-              case 4:
+              case 3:
               case 'end':
                 return _context3.stop();
             }
@@ -455,7 +457,7 @@ if (false) {(function () {
       }
       if (del) {
         par = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(par, { rowState: 'D' });
-        console.log(par);
+
         this.delImage(par);
         return;
       }

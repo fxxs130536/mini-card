@@ -68,7 +68,6 @@ export default {
       this.spinShow = true
       // wx.showLoading({ title: '正在加载' })
       var wxCode = await api.wxLogin()
-
       var openId = await api.wxOpenId(wxCode.code)
       // this.$store.commit('inOpenId', openId)
       let data = { '@strOpenId_c': openId.openid, '@type': 4 }
@@ -79,7 +78,7 @@ export default {
       // } else {
       //   this.cardList = res.data
       // }
-      console.log(res.data)
+      // console.log(res.data)
       this.cardList = res.data
       this.getUser()
     },
@@ -89,16 +88,17 @@ export default {
       var openId = await api.wxOpenId(wxCode.code)
       var params = {'strOpenId_c': openId.openid, 'strOpenId_b': openId.openid}
       var resdata = await api.post_card_home(params)
+      // console.log(resdata)
       this.cardList.unshift(resdata)
       // wx.hideLoading()
       this.spinShow = false
     },
     linkCard (shareId) {
       this.$store.commit('shareOpenId', shareId)
-      if (shareId.toUpperCase() === this.openId.toUpperCase()) {
-        this.$router.push({ path: '/pages/admin/main', reLaunch: true })
-        return
-      }
+      // if (shareId.toUpperCase() === this.openId.toUpperCase()) {
+      //   this.$router.push({ path: '/pages/admin/main', reLaunch: true })
+      //   return
+      // }
       this.$router.push({ path: '/pages/home/main', isTab: true })
     }
   }

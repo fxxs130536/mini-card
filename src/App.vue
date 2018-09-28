@@ -13,7 +13,9 @@ export default {
       var wxCode = await api.wxLogin()
 
       var openId = await api.wxOpenId(wxCode.code)
+      // console.log(openId)
       var openIdCode = openId.openid
+
       var par = {
         'strOpenId': openIdCode
       }
@@ -39,7 +41,6 @@ export default {
     },
     async loginFn (par) {
       var data = await api.post_login(par)
-
       this.$store.commit('inUserInfo', data)
       this.$store.commit('inOpenId', par.strOpenId)
     }

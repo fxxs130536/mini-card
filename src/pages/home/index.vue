@@ -20,7 +20,7 @@
                         <img :src="cardInfo.strAvatarUrl" alt="">
                     </div>
                 </div>
-                <navigator class="card-list-btn" url="/pages/cardlist/main" open-type="reLaunch">
+                <navigator v-if="admin" class="card-list-btn" url="/pages/admin/main" open-type="reLaunch">
                     <i-icon type="businesscard" size="28" color="#fff" />
                 </navigator>
           </div>
@@ -199,6 +199,7 @@ import { $Message } from '@/utils/base'
 export default {
   data () {
     return {
+      admin: false,
       tabBar: {
         current: 'homepage'
       },
@@ -247,6 +248,13 @@ export default {
       }
     }
   },
+  onPullDownRefresh: function () {
+    this.getCardInfo()
+    this.addCardList()
+    this.initAudio()
+    this.productList()
+    wx.stopPullDownRefresh()
+  },
   components: {
     slideFull
   },
@@ -261,9 +269,8 @@ export default {
   },
 
   mounted () {
-    this.addCardLog()
-    this.addCardList()
     this.getCardInfo()
+    // this.addCardList()
     this.initAudio()
     this.productList()
   },
@@ -277,16 +284,30 @@ export default {
       await addEditLog(paramData)
     },
     async  addCardList () {
+      // 增加到名片列表
       var params = {'strOpenId_c': this.openId, 'strOpenId_b': this.shareOpenId, type: 4}
       await api.post_like(params)
     },
     async  getCardInfo () {
-      // console.log(this.$store.state.shareOpenId)
+      //  屏蔽名片列表新增
+      var wxCode = await api.wxLogin()
+      var openId = await api.wxOpenId(wxCode.code)
+      this.$store.commit('inOpenId', openId.openid)
+      if (!this.shareOpenId) {
+        this.$store.commit('shareOpenId', this.openId)
+      }
+      if (this.shareOpenId.toUpperCase() === this.openId.toUpperCase()) {
+        this.admin = true
+      }
+      //  屏蔽名片列表新增end
       var params = {'strOpenId_c': this.openId, 'strOpenId_b': this.shareOpenId}
       var res = await api.post_card_home(params)
       this.cardInfo = res
       console.log(res)
       this.$store.commit('shareCardInfo', res)
+      this.$store.commit('shareOpenId', res.strOpenId)
+
+      this.addCardLog()
     },
     async link () {
       var params = {'strOpenId_c': this.openId, 'strOpenId_b': this.shareOpenId, type: 2}
@@ -302,7 +323,7 @@ export default {
     },
     dial (str) {
       this.$wxapi.makePhoneCall({
-        phoneNumber: '13553699106'
+        phoneNumber: str
       }).then(async res => {
         let Details = this.userInfo.strName + '拨打了' + this.shareCardInfo.strName + '的电话'
 

@@ -91,12 +91,18 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_api__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_extends__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_api__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(2);
+
+
 
 
 //
@@ -124,13 +130,14 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
+      imgsrc: '../../static/assets/login.png',
       canIUse: false,
       getInfoShow: false
 
     };
   },
 
-  computed: __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapGetters */])({
+  computed: __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_5_vuex__["b" /* mapGetters */])({
     openId: 'openId'
   })),
   mounted: function mounted() {
@@ -141,6 +148,7 @@ if (false) {(function () {
         title: '授权登录'
       });
     } else {
+      this.getInfoShow = false;
       wx.setNavigationBarTitle({
         title: '正在加载'
       });
@@ -159,33 +167,79 @@ if (false) {(function () {
       }
     },
     backPath: function backPath() {
-      var query = this.$route.query;
-      console.log(query.target);
-      var para = {};
-      if (query.para) {
-        para = query.para;
+      var _this = this;
 
-        para = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(para);
-        console.log(para);
-      }
-      if (query.shareOpenId) {
-        this.$store.commit('shareOpenId', query.shareOpenId);
-      }
-      if (query.shareOpenId.toUpperCase() === this.openId.toUpperCase()) {
-        this.$router.push({ path: '/pages/admin/main', reLaunch: true });
-        return;
-      }
-      switch (query.type) {
-        case 'new':
-          this.$router.push({ path: query.target, reLaunch: true });
-          break;
-        case 'tab':
-          this.$router.push({ path: query.target, isTab: true });
-          break;
-        default:
-          this.$router.push({ path: query.target, reLaunch: true, query: para });
-          break;
-      }
+      return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var query, para;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                query = _this.$route.query;
+
+                // console.log(query.target)
+
+                para = {};
+
+                if (query.para) {
+                  para = query.para;
+
+                  para = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify___default()(para);
+                  // console.log(para)
+                }
+                if (query.shareOpenId) {
+                  _this.$store.commit('shareOpenId', query.shareOpenId);
+                  // this.addCardList(this.openId, query.shareOpenId)
+                  // if (query.shareOpenId.toUpperCase() === this.openId.toUpperCase()) {
+                  //   this.$router.push({ path: '/pages/admin/main', reLaunch: true })
+                  //   return
+                  // }
+                }
+
+                _context.t0 = query.type;
+                _context.next = _context.t0 === 'new' ? 7 : _context.t0 === 'tab' ? 9 : 11;
+                break;
+
+              case 7:
+                _this.$router.push({ path: query.target, reLaunch: true });
+                return _context.abrupt('break', 13);
+
+              case 9:
+                _this.$router.push({ path: query.target, isTab: true });
+                return _context.abrupt('break', 13);
+
+              case 11:
+                _this.$router.push({ path: query.target, reLaunch: true, query: para });
+                return _context.abrupt('break', 13);
+
+              case 13:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, _this);
+      }))();
+    },
+    addCardList: function addCardList(openId, shareOpenId) {
+      var _this2 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var params;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                params = { 'strOpenId_c': openId, 'strOpenId_b': shareOpenId, type: 4 };
+                _context2.next = 3;
+                return __WEBPACK_IMPORTED_MODULE_4__utils_api__["a" /* default */].post_like(params);
+
+              case 3:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, _this2);
+      }))();
     }
   },
   created: function created() {}
@@ -200,7 +254,14 @@ if (false) {(function () {
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "page app"
-  }, [_vm._m(0), _vm._v(" "), (_vm.getInfoShow) ? _c('div', {
+  }, [_c('div', {
+    staticClass: "login-img"
+  }, [_c('img', {
+    staticClass: "login-src",
+    attrs: {
+      "src": _vm.imgsrc
+    }
+  })]), _vm._v(" "), (_vm.getInfoShow) ? _c('div', {
     staticClass: "getInfo"
   }, [(_vm.canIUse) ? _c('i-button', {
     attrs: {
@@ -220,16 +281,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     }
   })], 1)
 }
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "login-img"
-  }, [_c('img', {
-    staticClass: "login-src",
-    attrs: {
-      "src": "/../../static/assets/login.png"
-    }
-  })])
-}]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

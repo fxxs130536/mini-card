@@ -9,8 +9,8 @@
 	},
 	"miniprogramRoot": "./dist/",
 	"compileType": "miniprogram",
-	"appid": "wx9c20c7365b5c702f",
-	"projectname": "mini-card",
+	"appid": "wx251690fb65258b98",
+	"projectname": "%E5%90%8D%E7%89%87%E5%B0%8F%E7%A8%8B%E5%BA%8F",
 	"libVersion": "2.2.2",
 	"condition": {
 		"search": {

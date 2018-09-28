@@ -124,7 +124,7 @@
         <i-button bindtap="handleProxy" type="primary" data-eventid="{{'4'}}" data-comkey="{{$k}}" class="_i-button data-v-2ceac3b5">生成二维码</i-button>
       </view>
       <view class="_div data-v-2ceac3b5 submit-btn">
-        <i-button bindtap="handleProxy" type="primary" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_i-button data-v-2ceac3b5">返回名片列表</i-button>
+        <i-button bindtap="handleProxy" type="primary" data-eventid="{{'5'}}" data-comkey="{{$k}}" class="_i-button data-v-2ceac3b5">查看名片信息</i-button>
       </view>
     </view>
   </view>

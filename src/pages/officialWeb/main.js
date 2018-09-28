@@ -5,6 +5,7 @@ app.$mount()
 export default {
   config: {
     enablePullDownRefresh: true,
+    backgroundTextStyle: 'dark',
     navigationBarTitleText: '官网',
     'usingComponents': {
       'i-panel': '../../dist/panel/index',

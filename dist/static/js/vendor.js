@@ -6666,6 +6666,57 @@ var index_esm = {
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(74);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _promise = __webpack_require__(19);
+
+var _promise2 = _interopRequireDefault(_promise);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (fn) {
+  return function () {
+    var gen = fn.apply(this, arguments);
+    return new _promise2.default(function (resolve, reject) {
+      function step(key, arg) {
+        try {
+          var info = gen[key](arg);
+          var value = info.value;
+        } catch (error) {
+          reject(error);
+          return;
+        }
+
+        if (info.done) {
+          resolve(value);
+        } else {
+          return _promise2.default.resolve(value).then(function (value) {
+            step("next", value);
+          }, function (err) {
+            step("throw", err);
+          });
+        }
+      }
+
+      return step("next");
+    });
+  };
+};
+
+/***/ }),
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6873,7 +6924,8 @@ var api = {
   del_Image: function del_Image(data) {
     return __WEBPACK_IMPORTED_MODULE_2__axios__["a" /* default */].postApiData({
       data: data,
-      url: '/Upload/UpLoadImgs'
+      url: '/Upload/UpLoadImgs',
+      type: 'application/x-www-form-urlencoded'
     });
   },
   // 获取微信的OpenId，js_code必传
@@ -6998,57 +7050,6 @@ var api = {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (api);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(74);
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _promise = __webpack_require__(19);
-
-var _promise2 = _interopRequireDefault(_promise);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (fn) {
-  return function () {
-    var gen = fn.apply(this, arguments);
-    return new _promise2.default(function (resolve, reject) {
-      function step(key, arg) {
-        try {
-          var info = gen[key](arg);
-          var value = info.value;
-        } catch (error) {
-          reject(error);
-          return;
-        }
-
-        if (info.done) {
-          resolve(value);
-        } else {
-          return _promise2.default.resolve(value).then(function (value) {
-            step("next", value);
-          }, function (err) {
-            step("throw", err);
-          });
-        }
-      }
-
-      return step("next");
-    });
-  };
-};
 
 /***/ }),
 /* 6 */
@@ -10136,10 +10137,12 @@ axios.getApiData = function (options) {
 
 axios.postApiData = function (options) {
   return new __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
+    var header = { 'Content-Type': options.type || 'application/json' };
     wx.request({
       url: domain + options.url,
       method: options.method || 'POST',
       data: options.data,
+      header: header,
       success: function success(res) {
         resolve(res.data);
       },
@@ -10152,6 +10155,7 @@ axios.postApiData = function (options) {
 
 axios.getAjaxData = function (param, strMethod, uid) {
   return new __WEBPACK_IMPORTED_MODULE_2_babel_runtime_core_js_promise___default.a(function (resolve, reject) {
+    // debugger
     if (strMethod) {
       var _paramData = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_object_assign___default()(param, {
         strMethod: strMethod
@@ -10163,7 +10167,7 @@ axios.getAjaxData = function (param, strMethod, uid) {
       param: param || paramData
     });
     var en = Object(__WEBPACK_IMPORTED_MODULE_3__encode__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_json_stringify___default()(data));
-    console.log(data);
+    // console.log(data)
     wx.request({
       url: domain + '/Mobile/GetData/GetAjaxData',
       method: 'POST',
@@ -10171,7 +10175,7 @@ axios.getAjaxData = function (param, strMethod, uid) {
         data: en
       },
       success: function success(res) {
-        console.log(res);
+        // console.log(res)
         try {
           if (res.data.success) {
             resolve(res.data.data);

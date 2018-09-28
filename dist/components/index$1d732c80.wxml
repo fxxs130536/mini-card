@@ -16,7 +16,7 @@
             <image src="{{cardInfo.strAvatarUrl}}" alt class="_img data-v-40c71862"></image>
           </view>
         </view>
-        <navigator class="_navigator data-v-40c71862 card-list-btn" url="/pages/cardlist/main" open-type="reLaunch">
+        <navigator wx:if="{{admin}}" class="_navigator data-v-40c71862 card-list-btn" url="/pages/admin/main" open-type="reLaunch">
           <i-icon type="businesscard" size="28" color="#fff" class="_i-icon data-v-40c71862"></i-icon>
         </navigator>
       </view>

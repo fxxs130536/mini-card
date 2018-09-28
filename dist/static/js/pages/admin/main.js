@@ -14,7 +14,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MOD
 app.$mount();
 /* harmony default export */ __webpack_exports__["default"] = ({
   config: {
-    enablePullDownRefresh: false,
+    enablePullDownRefresh: true,
+    backgroundTextStyle: 'dark',
     navigationBarTitleText: '名片管理',
     'usingComponents': {
       'i-tab-bar': '../../dist/tab-bar/index',
@@ -106,11 +107,11 @@ if (false) {(function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_card_item__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_man_detail_vue__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vuex__ = __webpack_require__(2);
@@ -329,6 +330,12 @@ if (false) {(function () {
     };
   },
 
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.Get_OperationLogsTime();
+    this.Get_OperationLogsBehavior();
+    this.Get_OperationLogsPeople();
+    wx.stopPullDownRefresh();
+  },
   components: {
     Card: __WEBPACK_IMPORTED_MODULE_4__components_card_item__["a" /* default */],
     manDetail: __WEBPACK_IMPORTED_MODULE_5__components_man_detail_vue__["a" /* default */]
@@ -497,7 +504,7 @@ if (false) {(function () {
       }))();
     },
     goCardList: function goCardList() {
-      this.$router.push({ path: '/pages/cardlist/main', reLaunch: true });
+      this.$router.push({ path: '/pages/home/main', reLaunch: true });
     }
   }
 });
@@ -1291,7 +1298,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     on: {
       "click": _vm.goCardList
     }
-  }, [_vm._v("返回名片列表")])], 1)]) : _vm._e()], 1)
+  }, [_vm._v("查看名片信息")])], 1)]) : _vm._e()], 1)
 }
 var staticRenderFns = []
 render._withStripped = true

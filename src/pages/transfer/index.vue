@@ -3,8 +3,8 @@
   
   <div class="page app">
     	<div class="login-img">
-		    <img src="/../../static/assets/login.png" class="login-src">
-	</div>
+		    <img :src="imgsrc" class="login-src">
+	  </div>
     <div v-if="getInfoShow" class="getInfo">
           <!-- <button v-if="canIUse" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">授权登录</button> -->
           <i-button v-if="canIUse" open-type="getUserInfo" @getuserinfo="bindGetUserInfo" type="primary">授权登录</i-button>
@@ -23,6 +23,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
+      imgsrc: '../../static/assets/login.png',
       canIUse: false,
       getInfoShow: false
 
@@ -41,6 +42,7 @@ export default {
         title: '授权登录'
       })
     } else {
+      this.getInfoShow = false
       wx.setNavigationBarTitle({
         title: '正在加载'
       })
@@ -57,23 +59,26 @@ export default {
         console.log(e.mp.detail.errMsg)
       }
     },
-    backPath () {
+    async backPath () {
       const query = this.$route.query
-      console.log(query.target)
+
+      // console.log(query.target)
       let para = {}
       if (query.para) {
         para = query.para
 
         para = JSON.stringify(para)
-        console.log(para)
+        // console.log(para)
       }
       if (query.shareOpenId) {
         this.$store.commit('shareOpenId', query.shareOpenId)
+        // this.addCardList(this.openId, query.shareOpenId)
+        // if (query.shareOpenId.toUpperCase() === this.openId.toUpperCase()) {
+        //   this.$router.push({ path: '/pages/admin/main', reLaunch: true })
+        //   return
+        // }
       }
-      if (query.shareOpenId.toUpperCase() === this.openId.toUpperCase()) {
-        this.$router.push({ path: '/pages/admin/main', reLaunch: true })
-        return
-      }
+
       switch (query.type) {
         case 'new':
           this.$router.push({ path: query.target, reLaunch: true })
@@ -85,6 +90,10 @@ export default {
           this.$router.push({ path: query.target, reLaunch: true, query: para })
           break
       }
+    },
+    async addCardList (openId, shareOpenId) {
+      var params = {'strOpenId_c': openId, 'strOpenId_b': shareOpenId, type: 4}
+      await api.post_like(params)
     }
   },
   created () {

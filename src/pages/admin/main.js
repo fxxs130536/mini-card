@@ -4,7 +4,8 @@ const app = new Vue(App)
 app.$mount()
 export default {
   config: {
-    enablePullDownRefresh: false,
+    enablePullDownRefresh: true,
+    backgroundTextStyle: 'dark',
     navigationBarTitleText: '名片管理',
     'usingComponents': {
       'i-tab-bar': '../../dist/tab-bar/index',

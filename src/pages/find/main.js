@@ -5,6 +5,7 @@ app.$mount()
 export default {
   config: {
     enablePullDownRefresh: true,
+    backgroundTextStyle: 'dark',
     navigationBarTitleText: '动态',
     'usingComponents': {
       'i-icon': '../../dist/icon/index',

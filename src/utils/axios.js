@@ -54,10 +54,12 @@ axios.getApiData = (options) => new Promise((resolve, reject) => {
 })
 
 axios.postApiData = (options) => new Promise((resolve, reject) => {
+  var header = {'Content-Type': options.type || 'application/json'}
   wx.request({
     url: domain + options.url,
     method: options.method || 'POST',
     data: options.data,
+    header: header,
     success: res => {
       resolve(res.data)
     },
@@ -68,6 +70,7 @@ axios.postApiData = (options) => new Promise((resolve, reject) => {
 })
 
 axios.getAjaxData = (param, strMethod, uid) => new Promise((resolve, reject) => {
+  // debugger
   if (strMethod) {
     const paramData = Object.assign(param, {
       strMethod: strMethod
@@ -79,7 +82,7 @@ axios.getAjaxData = (param, strMethod, uid) => new Promise((resolve, reject) => 
     param: param || paramData
   })
   const en = encode(JSON.stringify(data))
-  console.log(data)
+  // console.log(data)
   wx.request({
     url: domain + '/Mobile/GetData/GetAjaxData',
     method: 'POST',
@@ -87,7 +90,7 @@ axios.getAjaxData = (param, strMethod, uid) => new Promise((resolve, reject) => 
       data: en
     },
     success: res => {
-      console.log(res)
+      // console.log(res)
       try {
         if (res.data.success) {
           resolve(res.data.data)

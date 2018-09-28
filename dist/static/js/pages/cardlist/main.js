@@ -15,6 +15,7 @@ app.$mount();
 /* harmony default export */ __webpack_exports__["default"] = ({
   config: {
     enablePullDownRefresh: true,
+    backgroundTextStyle: 'dark',
     navigationBarTitleText: '名片列表',
     'usingComponents': {
       'i-card': '../../dist/card/index',
@@ -92,13 +93,13 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_asyncToGenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vuex__ = __webpack_require__(2);
 
 
@@ -204,11 +205,11 @@ if (false) {(function () {
                 // } else {
                 //   this.cardList = res.data
                 // }
-                console.log(res.data);
+                // console.log(res.data)
                 _this.cardList = res.data;
                 _this.getUser();
 
-              case 14:
+              case 13:
               case 'end':
                 return _context.stop();
             }
@@ -242,6 +243,7 @@ if (false) {(function () {
               case 9:
                 resdata = _context2.sent;
 
+                // console.log(resdata)
                 _this2.cardList.unshift(resdata);
                 // wx.hideLoading()
                 _this2.spinShow = false;
@@ -256,10 +258,10 @@ if (false) {(function () {
     },
     linkCard: function linkCard(shareId) {
       this.$store.commit('shareOpenId', shareId);
-      if (shareId.toUpperCase() === this.openId.toUpperCase()) {
-        this.$router.push({ path: '/pages/admin/main', reLaunch: true });
-        return;
-      }
+      // if (shareId.toUpperCase() === this.openId.toUpperCase()) {
+      //   this.$router.push({ path: '/pages/admin/main', reLaunch: true })
+      //   return
+      // }
       this.$router.push({ path: '/pages/home/main', isTab: true });
     }
   }

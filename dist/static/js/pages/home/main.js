@@ -14,7 +14,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MOD
 app.$mount();
 /* harmony default export */ __webpack_exports__["default"] = ({
   config: {
-    enablePullDownRefresh: false,
+    enablePullDownRefresh: true,
+    backgroundTextStyle: 'dark',
     navigationBarTitleText: '名片',
     'usingComponents': {
       'i-row': '../../dist/row/index',
@@ -99,11 +100,11 @@ if (false) {(function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_api__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_slideFull__ = __webpack_require__(69);
@@ -314,6 +315,7 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
+      admin: false,
       tabBar: {
         current: 'homepage'
       },
@@ -381,6 +383,13 @@ if (false) {(function () {
     };
   },
 
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.getCardInfo();
+    this.addCardList();
+    this.initAudio();
+    this.productList();
+    wx.stopPullDownRefresh();
+  },
   components: {
     slideFull: __WEBPACK_IMPORTED_MODULE_6__components_slideFull__["a" /* default */]
   },
@@ -393,9 +402,8 @@ if (false) {(function () {
   })),
 
   mounted: function mounted() {
-    this.addCardLog();
-    this.addCardList();
     this.getCardInfo();
+    // this.addCardList()
     this.initAudio();
     this.productList();
   },
@@ -433,6 +441,7 @@ if (false) {(function () {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                // 增加到名片列表
                 params = { 'strOpenId_c': _this4.openId, 'strOpenId_b': _this4.shareOpenId, type: 4 };
                 _context3.next = 3;
                 return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].post_like(params);
@@ -449,24 +458,45 @@ if (false) {(function () {
       var _this5 = this;
 
       return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee4() {
-        var params, res;
+        var wxCode, openId, params, res;
         return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                // console.log(this.$store.state.shareOpenId)
+                _context4.next = 2;
+                return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].wxLogin();
+
+              case 2:
+                wxCode = _context4.sent;
+                _context4.next = 5;
+                return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].wxOpenId(wxCode.code);
+
+              case 5:
+                openId = _context4.sent;
+
+                _this5.$store.commit('inOpenId', openId.openid);
+                if (!_this5.shareOpenId) {
+                  _this5.$store.commit('shareOpenId', _this5.openId);
+                }
+                if (_this5.shareOpenId.toUpperCase() === _this5.openId.toUpperCase()) {
+                  _this5.admin = true;
+                }
+                //  屏蔽名片列表新增end
                 params = { 'strOpenId_c': _this5.openId, 'strOpenId_b': _this5.shareOpenId };
-                _context4.next = 3;
+                _context4.next = 12;
                 return __WEBPACK_IMPORTED_MODULE_3__utils_api__["a" /* default */].post_card_home(params);
 
-              case 3:
+              case 12:
                 res = _context4.sent;
 
                 _this5.cardInfo = res;
                 console.log(res);
                 _this5.$store.commit('shareCardInfo', res);
+                _this5.$store.commit('shareOpenId', res.strOpenId);
 
-              case 7:
+                _this5.addCardLog();
+
+              case 18:
               case 'end':
                 return _context4.stop();
             }
@@ -516,7 +546,7 @@ if (false) {(function () {
       var _this7 = this;
 
       this.$wxapi.makePhoneCall({
-        phoneNumber: '13553699106'
+        phoneNumber: str
       }).then(function () {
         var _ref2 = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_asyncToGenerator___default()( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_1_babel_runtime_regenerator___default.a.mark(function _callee6(res) {
           var Details, paramData;
@@ -976,10 +1006,10 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "src": _vm.cardInfo.strAvatarUrl,
       "alt": ""
     }
-  })])]), _vm._v(" "), _c('navigator', {
+  })])]), _vm._v(" "), (_vm.admin) ? _c('navigator', {
     staticClass: "card-list-btn",
     attrs: {
-      "url": "/pages/cardlist/main",
+      "url": "/pages/admin/main",
       "open-type": "reLaunch"
     }
   }, [_c('i-icon', {
@@ -989,7 +1019,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "color": "#fff",
       "mpcomid": '0'
     }
-  })], 1)], 1)]), _vm._v(" "), _c('div', {
+  })], 1) : _vm._e()], 1)]), _vm._v(" "), _c('div', {
     staticClass: "bgf"
   }, [_c('div', {
     staticClass: "show-all-card text-center p-b-1",
